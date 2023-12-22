@@ -38,7 +38,8 @@ import { grey } from '@mui/material/colors';
 
 import { useNavigate } from "react-router-dom";
 
-import { SwipePOP } from "./swipe";
+// import { SwipePOP } from "./Swipe";
+import { SwipePOP } from "./Swipe";
 
 
 const style = {
