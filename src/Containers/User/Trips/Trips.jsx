@@ -51,7 +51,7 @@ function UserTripDetails() {
 
   return (
     <div>
-          <div style={{ display: "flex", paddingRight: "20px",paddingRight: "20px", paddingTop: "20px" }}>
+          <div style={{ display: "flex", paddingRight: "20px", paddingTop: "20px" }}>
           <div style={{ flexBasis: "20%" }}>
           <UserProfileSideBar/>
            </div>
