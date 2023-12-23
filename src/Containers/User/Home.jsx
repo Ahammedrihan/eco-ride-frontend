@@ -12,7 +12,7 @@ function Home() {
     <div>
       <Navbar/>
       <UserHomeCarousal/>
-      <div style={{display:"flex"}}>
+      {/* <div style={{display:"flex"}}>
       <div
         style={{
           backgroundImage: `url(${img})`,
@@ -27,7 +27,7 @@ function Home() {
 
 
 
-      </div>
+      </div> */}
       
      
       <WhyChoose/>
