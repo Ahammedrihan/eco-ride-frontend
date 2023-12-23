@@ -11,7 +11,6 @@ export const resetPassword ="/api/user/reset-password/"
 export const userLogout = "/api/user/user-logout/"
 
 
-// <<<<<<<<DRIVER>>>>>>>
 
 export const signupDriver = "/api/user/driver-register/"
 
@@ -21,7 +20,6 @@ export const addVehicle = "/api/user/add-vehicle/<int:user_id>/";
 export const driverProfile = "api/driver/driver/profile/"
 export const userProfileurl = "api/user/profile/"
 
-// export const userBlock = baseUrl+"user-block/<int:user_id>/"
 
 export const driverManageVehicleUrl = "api/driver/profile/manage-vehicle/<int:vehicle_id>/"
 
