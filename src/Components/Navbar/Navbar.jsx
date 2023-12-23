@@ -47,7 +47,7 @@ function Navbar() {
     ];
   } else {
     settings = [
-      { id: 1, text: "register", path: "/register" },
+      { id: 1, text: "Register", path: "/register" },
       { id: 2, text: "Login", path: "/login" },
     ];
   }

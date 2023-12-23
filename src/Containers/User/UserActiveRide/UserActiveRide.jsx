@@ -22,20 +22,19 @@ import {useSelector} from "react-redux"
 import UserProfileSideBar from "../../../Components/User/UserProfileSidebar";
 
 
-function UserTripDetails() {
+function UserActiveRide() {
   const userStoreData = useSelector((store)=>store.authuser.userData)
   const accessToken = userStoreData.data.access
   const [allTrips,setAllTrips] = useState([])
   const [isTripsAvailable,TripsAvailablesetIs] = useState(false)
-  console.log(allTrips)
 
   useEffect(()=>{
-    userAllTrips()
+    UserActiveTripFunction()
 
   },[])
 
-  const userAllTrips = async()=>{
-    await axios.get('api/user/all-trips',{
+  const UserActiveTripFunction = async()=>{
+    await axios.get('api/user/active-trip/',{
       headers:{
         Authorization: `Bearer ${accessToken}`
       }
@@ -56,34 +55,31 @@ function UserTripDetails() {
           <UserProfileSideBar/>
            </div>
           <div style={{  borderRadius: "10px"  }}></div>
-          
              <CollapsibleTable allTrips={allTrips}/>: 
-            
-          
           </div>
     </div>
   )
 }
-export default UserTripDetails
+export default UserActiveRide
 
 
 function Row(props) {
-  const {trip,}= props
+  const {allTrips}= props
   const [open, setOpen] = React.useState(false);
   const [simpleIndex,setSimpleIndex] = useState(0)
 
-  const tripsEndDate = trip?.Trip_end_time
-  const dateOfEndRide = new Date(tripsEndDate)
-  const tripDate = dateOfEndRide.getFullYear()+'-'+ (dateOfEndRide.getMonth()+1 ) +'-'+ dateOfEndRide.getDate()
+//   const tripsEndDate = allTrips?.Trip_end_time
+//   const dateOfEndRide = new Date(tripsEndDate)
+//   const tripDate = dateOfEndRide.getFullYear()+'-'+ (dateOfEndRide.getMonth()+1 ) +'-'+ dateOfEndRide.getDate()
  
-  const formattedEndDate = dateOfEndRide.toISOString().slice(0, 19).replace("T", " ");
-  const tripEndTime =  ''+formattedEndDate
+//   const formattedEndDate = dateOfEndRide.toISOString().slice(0, 19).replace("T", " ");
+//   const tripEndTime =  ''+formattedEndDate
 
 
-  const tripstart = trip?.created_at
-  const dateOfStart = new Date(tripstart)
-  const formattedStartDate = dateOfEndRide.toISOString().slice(0, 19).replace("T", " ");
-  const tripStartTime =  ''+formattedStartDate
+//   const tripstart = allTrips?.created_at
+//   const dateOfStart = new Date(tripstart)
+//   const formattedStartDate = dateOfEndRide.toISOString().slice(0, 19).replace("T", " ");
+//   const tripStartTime =  ''+formattedStartDate
 
    
     return (
@@ -100,14 +96,14 @@ function Row(props) {
           <TableCell component="th" scope="row"  sx={{ color: "white" }}>
             {simpleIndex+1}
           </TableCell>
-          <TableCell align="center" sx={{ color: "#c2b7cc"}}>{trip?.start_location_name}</TableCell>
-          <TableCell align="center" sx={{ color: "#c2b7cc" }}>{trip?.end_location_name}</TableCell>
-          <TableCell align="center" sx={{ color: "#c2b7cc"}}>{trip?.total_distance} Km</TableCell>
+          <TableCell align="center" sx={{ color: "#c2b7cc"}}>{allTrips?.start_location_name}</TableCell>
+          <TableCell align="center" sx={{ color: "#c2b7cc" }}>{allTrips?.end_location_name}</TableCell>
+          <TableCell align="center" sx={{ color: "#c2b7cc"}}>{allTrips?.total_distance} Km</TableCell>
           {/* <TableCell align="center" sx={{ color: "white" }}></TableCell> */}
-          <TableCell align="center" sx={{ color: "#c2b7cc" }}>₹ {trip?.amount}</TableCell>
-          <TableCell align="center" sx={{ color: "#c2b7cc" }}>{trip?.payment_status == true? 'Completed':'Pending'}</TableCell>
-          <TableCell align="center" sx={{ color: "#c2b7cc" }}>{trip?.payment_method =="payafter"?" Pay After":"Online"}</TableCell>
-          <TableCell align="center" sx={{ color: "#c2b7cc" }}>{trip?.id}</TableCell>
+          <TableCell align="center" sx={{ color: "#c2b7cc" }}>₹ {allTrips?.amount}</TableCell>
+          <TableCell align="center" sx={{ color: "#c2b7cc" }}>{allTrips?.payment_status == true? 'Completed':'Pending'}</TableCell>
+          <TableCell align="center" sx={{ color: "#c2b7cc" }}>{allTrips?.payment_method =="payafter"?" Pay After":"Online"}</TableCell>
+          <TableCell align="center" sx={{ color: "#c2b7cc" }}>{allTrips?.id}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -116,7 +112,7 @@ function Row(props) {
                 <Typography variant="h6" gutterBottom component="div">
                   Additional Info
                 </Typography>
-                <Table size="small" aria-label="purchases">
+                {/* <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
                       <TableCell sx={{ color: "#c2b7cc" }}></TableCell>
@@ -134,13 +130,13 @@ function Row(props) {
                       </TableCell>
                       <TableCell  sx={{ color: "#c2b7cc"}}>{tripStartTime}</TableCell>
                       <TableCell align="center"  sx={{ color: "#c2b7cc"}}>{tripEndTime}</TableCell>
-                      <TableCell align="center"  sx={{ color: "#c2b7cc" }}>{trip?.driver.first_name}</TableCell>
-                      <TableCell align="center"  sx={{ color: "#c2b7cc" }}>{trip?.vehicle.registration_number}</TableCell> 
-                      <TableCell align="center"  sx={{ color: "#c2b7cc" }}>{trip?.vehicle.vehicle_name}</TableCell> 
+                      <TableCell align="center"  sx={{ color: "#c2b7cc" }}>{allTrips?.driver.first_name}</TableCell>
+                      <TableCell align="center"  sx={{ color: "#c2b7cc" }}>{allTrips?.vehicle.registration_number}</TableCell> 
+                      <TableCell align="center"  sx={{ color: "#c2b7cc" }}>{allTrips?.vehicle.vehicle_name}</TableCell> 
 
                     </TableRow>
                   </TableBody>
-                </Table>
+                </Table> */}
               </Box>
             </Collapse>
           </TableCell>
@@ -194,9 +190,10 @@ function Row(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-            {allTrips.map((trip)=>(
+            {/* {allTrips?.map((trip)=>(
               <Row trip={trip} key={trip.id}/>
-            ))}
+            ))} */}
+             <Row allTrips={allTrips} key={allTrips.id}/>
             </TableBody>
           </Table>
         </Table>
@@ -205,6 +202,4 @@ function Row(props) {
     );
   }
   
-
-
 

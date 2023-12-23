@@ -107,6 +107,7 @@ const UserProfileSideBar = () => {
                 </ListItemButton>
               </NavLink>
             </List>
+
             <List>
               <NavLink
                 to="/user-trips"
@@ -121,6 +122,22 @@ const UserProfileSideBar = () => {
                 </ListItemButton>
               </NavLink>
             </List>
+
+            <List>
+              <NavLink
+                to="/active-trips"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                {" "}
+                <ListItemButton disablePadding>
+                  <ListItemIcon>
+                    <DriveEtaIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Active Trip" />
+                </ListItemButton>
+              </NavLink>
+            </List>
+
             <List>
               <NavLink
                 to="/address"

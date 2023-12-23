@@ -22,7 +22,7 @@ import { driverLogout } from '../../../Redux/slices/driverSlice/driverauthSlice'
 import axios from '../../Utils/axios';
 
 
-const pages = ['Register', 'Pricing', 'Blog'];
+const pages = ['', '', ''];
 
 
 function Navbar() {

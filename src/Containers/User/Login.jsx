@@ -154,10 +154,10 @@ export default function SignIn() {
                 setPassword(e.target.value)
               }}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -167,17 +167,17 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
-              </Grid>
-
+              </Grid> */}
+{/* 
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link  variant="body2" >
                   {"Don't have an account? Sign Up"}
                 </Link>
-              </Grid>
+              </Grid> */}
             </Grid>
           <Google/>
           </Box>
@@ -210,7 +210,7 @@ export function Google() {
            {/* style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}  */}
             <br />
             <br />
-            <GoogleLogin onSuccess={responseMessage} shape="circle"  onError={errorMessage} />
+            {/* <GoogleLogin onSuccess={responseMessage} shape="circle"  onError={errorMessage} /> */}
             {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
             </div>
             {/* <GoogleLogin onSuccess={responseMessage}  theme="filled_black" text="signup_with" shape="circle" onError={errorMessage} /> */}

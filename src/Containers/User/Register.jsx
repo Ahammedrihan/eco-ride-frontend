@@ -20,6 +20,7 @@ import {useState} from 'react';
 import { useForm } from "react-hook-form";
 import { signup } from '../../Utils/urls';
 import axios  from '../../Utils/axios';
+import VerifyOTP from './VerifyOtp';
 
 
 
@@ -74,8 +75,8 @@ export default function SignUp() {
                 text: 'The user details have been updated.',
                 icon: 'success'
               }).then(() => {
-                // redirect to login after success
                 console.log("helloooo")
+                localStorage.setItem('randomUserEmail',email)
                 navigate('/verify-otp')
                 
               });
@@ -121,6 +122,7 @@ export default function SignUp() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
+        
         <CssBaseline />
         <Box
           sx={{

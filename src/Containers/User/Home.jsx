@@ -4,16 +4,37 @@ import UserHomeCarousal from '../../Components/User/HomeCarousal/UserHomeCarousa
 import WhyChoose from '../../Components/User/HomeCarousal/WhyChoose'
 import Faq from '../../Components/User/Faq'
 
+import img from "../../assets/Pool.Webp";
+
+
 function Home() {
   return (
     <div>
       <Navbar/>
       <UserHomeCarousal/>
+      <div style={{display:"flex"}}>
+      <div
+        style={{
+          backgroundImage: `url(${img})`,
+          height: "540px",
+          width:"1100px",
+          marginLeft:"-1px"
+        }}
+      ></div>
+      <div>
+      
+      </div>
+
+
+
+      </div>
+      
+     
       <WhyChoose/>
 
       <Faq />
    
-      <h1> user home</h1>
+    
 
 
     </div>

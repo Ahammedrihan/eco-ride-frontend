@@ -171,10 +171,10 @@ export default function DriverLogin() {
                 setPassword(e.target.value)
               }}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -185,18 +185,18 @@ export default function DriverLogin() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
+              {/* <Grid item xs>
                 <Link href="#" variant="body2" >
-                {/* style={{textDecoration: 'none',color:"black"}} */}
+                style={{textDecoration: 'none',color:"black"}}
                   Forgot password?
                 </Link>
-              </Grid>
+              </Grid> */}
 
-              <Grid item>
+              {/* <Grid item>
                 <Link href="#" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
-              </Grid>
+              </Grid> */}
             </Grid>
         
           </Box>

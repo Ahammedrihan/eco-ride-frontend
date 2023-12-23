@@ -66,12 +66,22 @@ export default function ProfilePage(props) {
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Full Name</MDBCardText>
+                    <MDBCardText>First Name</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{userData?.first_name}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Second Name</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{userData?.last_name}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+              
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
@@ -90,7 +100,8 @@ export default function ProfilePage(props) {
                     <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{userData?.phone}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                <hr />
+                
+                {/* <hr />
                 {userData?.profile_info ? 
                 <>
                  <MDBRow>
@@ -107,10 +118,10 @@ export default function ProfilePage(props) {
                     <MDBCardText>Age</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{userData?.profile_info?.age}</MDBCardText>
+                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{userData?.profile_info?.dob}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                </>:null}
+                </>:null} */}
               </MDBCardBody>
             </MDBCard>
             </MDBCol>
@@ -125,14 +136,17 @@ export default function ProfilePage(props) {
                    <MDBListGroupItem className=" p-3">
                      <MDBCardText style={{fontWeight:"bold",textAlign:"center",fontSize:"30px"}}>{userData?.ride_info ? userData?.ride_info?.length : "0" }</MDBCardText>
                      <MDBCardText style={{textAlign:"center"}}>Total Ride History</MDBCardText>
-                   </MDBListGroupItem>
+                     </MDBListGroupItem>
+                     {userData?.vehicle_info?
+                     <>
+                     
                       <MDBListGroupItem className=" p-3">
                      <MDBCardText style={{fontWeight:"bold",textAlign:"center",fontSize:"30px"}}>{userData?.vehicle_info?.length}</MDBCardText>
                      <MDBCardText style={{textAlign:"center"}}>Total Profile Vehicles</MDBCardText>
                    </MDBListGroupItem>
-
-             
-                  
+                     </>:
+                     null}
+    
                  </MDBListGroup>
                </MDBCardBody>
              </MDBCard> 

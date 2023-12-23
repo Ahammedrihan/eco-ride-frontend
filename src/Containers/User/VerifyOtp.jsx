@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, redirect, useNavigate } from 'react-router-dom';
 import {useDispatch ,useSelector} from 'react-redux'
 import axios from '../../Utils/axios'
 import jwt_decode from 'jwt-decode'
@@ -23,28 +23,79 @@ import { GoogleLogin } from '@react-oauth/google';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { display } from '@mui/system';
 
+
 const defaultTheme = createTheme();
 
-const VerifyOTP = () => {
-  const [timer, setTimer] = useState(300); // Set the duration in seconds (5 minutes = 300 seconds)
+const VerifyOTP = (props) => {
+   
+  const [timer, setTimer] = useState(10);
+  const [otp, setOtp] = useState('');
+  const navigate = useNavigate();
+  const email = localStorage.getItem('randomUserEmail')
+
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const minutes = Math.floor(timer / 60);
-      const seconds = timer % 60;
-
-      // Decrement the timer
-      setTimer(timer => timer - 1);
-
-      // Check if the timer has reached 0
-      if (timer < 0) {
-        clearInterval(interval);
-      }
+      setTimer((prevTimer) => prevTimer - 1);
     }, 1000);
 
-    // Clear the interval when the component is unmounted
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (timer === 0) {
+        const verificationFailFunction = async()=>{
+            await axios.post('api/user/verify-otp-fail/',{email})
+            .then((response)=>{
+                console.log(response.data)
+            })
+        }
+      navigate('/register'); 
+      verificationFailFunction()
+
+    }
   }, [timer]);
+
+
+
+  const verifyOtpSuccess = async()=>{
+
+    await axios.post('api/user/verify-otp/',{email,otp}
+    ).then((response)=>{
+        if (response.status === 200){
+            console.log(response.data)
+            Swal.fire({
+                title: 'Success!',
+                text: 'The user details have been updated.',
+                icon: 'success'
+              })
+              navigate('/login');
+        }else{
+            Swal.fire({
+                title: 'Verification Failed!',
+                text: 'Please Try Again.',
+                icon: 'error'
+              })
+        }
+    }).catch((error)=>{
+        console.log(error,"error")
+        Swal.fire({
+            title: 'Verification Failed!',
+            text: 'Please Try Again.',
+            icon: 'error'
+          })
+    })
+
+
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    verifyOtpSuccess()
+    
+
+  }
 
   return (
     <div className="container">
@@ -65,6 +116,8 @@ const VerifyOTP = () => {
           <Typography component="h1" variant="h5">
             Verify OTP
           </Typography>
+          Time remaining: {timer} seconds {email}
+
           <Box component="form"  noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -74,10 +127,10 @@ const VerifyOTP = () => {
               label="Enter your otp"
               name="otp"
               autoComplete="otp"
-            //   value={email}
-            //   onChange={(e)=>{
-            //     setEmail(e.target.value)
-            //   }}
+              value={otp}
+              onChange={(e)=>{
+                setOtp(e.target.value)
+              }}
               autoFocus
             />
    
@@ -86,10 +139,12 @@ const VerifyOTP = () => {
               type="submit"
               fullWidth
               variant="contained"
+              onClick={()=>handleSubmit()}
               sx={{ mt: 3, mb: 2 }}
             >
                 Submit Otp
             </Button>
+            
            
           </Box>
         </Box>
