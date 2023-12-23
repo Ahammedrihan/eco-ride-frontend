@@ -1,4 +1,6 @@
-export const baseUrl = "https://www.eco-ride.online/";
+export const baseUrl = "https://backend.eco-ride.online/";
+
+
 
 export const signup = "api/user/register/"; 
 export const userLoginUrl = "api/token/";
@@ -9,6 +11,7 @@ export const resetPassword ="/api/user/reset-password/"
 export const userLogout = "/api/user/user-logout/"
 
 
+// <<<<<<<<DRIVER>>>>>>>
 
 export const signupDriver = "/api/user/driver-register/"
 
