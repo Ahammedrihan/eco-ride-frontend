@@ -1,12 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Form, Button, InputGroup } from 'react-bootstrap';
 import axios from "../../Utils/axios";
-import { userAddressAdd } from '../../Utils/urls';
-import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import Radio from '@mui/material/Radio';
@@ -17,30 +12,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWhhbW1lZHJpaGFuY20iLCJhIjoiY2xvc3BwejUyMDBmN
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const AddressPage = (props) => {
  
   const {userId,accessToken} = props
-  
   const [location, setLocation] = useState(null);
   const [locationButton,setLocationButton] = useState(false)
   const [locationMap,setLocationMap] = useState(false)
@@ -49,7 +23,6 @@ const AddressPage = (props) => {
     longitude : ""
   })
 
-  console.log(coordinate?.latitude,coordinate?.longitude,"YYYYYYYYYYYYYY")
   const [formData, setFormData] = useState({
     user:userId,
     address: "",
@@ -62,7 +35,6 @@ const AddressPage = (props) => {
   });
 
   const handleCoordinateChange  = (longitude,latitude)=>{
-  
     setCoordinate({longitude,latitude})
   }
 
@@ -92,27 +64,20 @@ const AddressPage = (props) => {
     
   };
 
-  const handleCurrentLocation =()=>{
-    formData.latitude = location.latitude
-    formData.longitude =  location.longitude
-  }
-
-  const handleChooseLocation =()=>{
-    formData.latitude = coordinate?.latitude
-    formData.longitude =  coordinate?.longitude
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    formData.latitude = coordinate?.latitude ? coordinate?.latitude : null
-    formData.longitude =  coordinate?.longitude ? coordinate?.longitude : null
+    if (locationButton){
+      formData.latitude = location?.latitude
+      formData.longitude =  location?.longitude
+    }else{
+    formData.latitude = coordinate?.latitude 
+    formData.longitude =  coordinate?.longitude 
    
+    }
     const data_stringify = JSON.stringify(formData);
     console.log(data_stringify, "stringify");
     
-
-    const response = axios.post(`/api/user/user-address/${userId}/`, data_stringify, {
+     axios.post(`/api/user/user-address/${userId}/`, data_stringify, {
       headers: {
         'Content-Type': "application/json",
         Authorization: `Bearer ${accessToken}`
@@ -195,11 +160,11 @@ const AddressPage = (props) => {
               <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female"name="radio-buttons-group">
                   <FormControlLabel value="" control={<Radio />} label="Choose Current Location" onClick={() => {setLocationButton(true);
                  setLocationMap(false) ;
-                 handleCurrentLocation () }}
+                  }}
                 />
                   <FormControlLabel value="male" control={<Radio />} label="Choose Other Location"onClick={() => {setLocationButton(false);
                   setLocationMap(true);
-                   handleChooseLocation()}} />
+                  }} />
               </RadioGroup>
            </Form.Group>
               </Row>
