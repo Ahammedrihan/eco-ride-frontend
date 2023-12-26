@@ -73,6 +73,8 @@ const UserProfileSideBar = () => {
     <ThemeProvider theme={darkTheme}>
       <Drawer variant="permanent" sx={{ width: drawerWidth, flexShrink: 0 }}>
         {open ? (
+          <>
+        
           <button
             onClick={hideSidebar}
             style={{ backgroundColor: "#1e1e1e", border: "none" }}
@@ -81,6 +83,8 @@ const UserProfileSideBar = () => {
               style={{ marginLeft: "80px", marginTop: "20px", color: "white" }}
             />
           </button>
+          
+          </>
         ) : (
           <button
             onClick={showSidebar}
@@ -166,10 +170,15 @@ const UserProfileSideBar = () => {
                 </ListItemButton>
               </NavLink>
             </List>
+
             
           </div>
         )}
+        <NavLink to="/">
+        <h6 style={{fontSize:"small",textAlign:"end",paddingRight:"20px",paddingTop:"40px"}} onClick={()=>{na}}> Back to home</h6>
+        </NavLink>
       </Drawer>
+
     </ThemeProvider>
   );
 };

@@ -98,7 +98,7 @@ const  AddVehicle= (props) => {
 
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100vw', paddingRight: "60px",paddingTop:"30px" }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: "60px",paddingTop:"30px" }}>
         <Card border="light" className="bg-white shadow-sm mb-4">
           <Card.Body>
             <h5 className="mb-4">Vehicle Information</h5>
@@ -168,7 +168,7 @@ const  AddVehicle= (props) => {
                         type="text"
                         name="vehicle_year"
                         value={formData.vehicle_year}
-                        placeholder="mm/dd/yyyy"
+                        placeholder="yyyy-mm-dd"
                         onChange={handleInputChange}
                       />
                     </InputGroup>
@@ -198,7 +198,7 @@ const  AddVehicle= (props) => {
                         type="text"
                         name="insurance_end_date"
                         value={formData.insurance_end_date}
-                        placeholder="mm/dd/yyyy"
+                        placeholder="yyyy-mm-dd"
                         onChange={handleInputChange}
                       />
                     </InputGroup>
@@ -213,10 +213,9 @@ const  AddVehicle= (props) => {
                       </InputGroup.Text>
                       <Form.Control
                         required
-                        type="text"
                         name="license_validity"
                         value={formData.license_validity}
-                        placeholder="mm/dd/yyyy"
+                        placeholder="yyyy-mm-dd"
                         onChange={handleInputChange}
                       />
                     </InputGroup>
@@ -227,13 +226,30 @@ const  AddVehicle= (props) => {
                 <Col sm={4} className="mb-3">
                   <Form.Group controlId="mileage">
                     <Form.Label>Mileage</Form.Label>
-                    <Form.Control required type="text" placeholder="mileage" name="mileage" onChange={handleInputChange} />
+                    <Form.Control
+
+                    required  
+                    pattern="[0-9]*" 
+                    placeholder="mileage"
+                    name="mileage" 
+                    onChange={handleInputChange} />
+                    <Form.Control.Feedback type='invalid'>
+                       Enter a valid mileage
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col sm={4} className="mb-3">
                   <Form.Group controlId="seatCapacity">
                     <Form.Label>Seat Capacity</Form.Label>
-                    <Form.Control required type="text" placeholder="capacity" name="seat_capacity" onChange={handleInputChange} />
+                    <Form.Control required 
+                    type="text" 
+                    pattern="[0-9]*" 
+                    placeholder="capacity" 
+                    name="seat_capacity" 
+                    onChange={handleInputChange} />
+                       <Form.Control.Feedback type='invalid'>
+                       Enter a valid seat capacity
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Row>
@@ -246,7 +262,7 @@ const  AddVehicle= (props) => {
                           handleImageChange}
                     />
               <div className="mt-3">
-                <Button variant="primary" type="submit">Save All</Button>
+                <Button variant="primary" type="submit" style={{backgroundColor:"#000",border:"none"}}>Save All</Button>
               </div>
             </Form>  
           </Card.Body>

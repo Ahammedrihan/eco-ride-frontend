@@ -45,15 +45,13 @@ const AddressPage = (props) => {
   const [locationButton,setLocationButton] = useState(false)
   const [locationMap,setLocationMap] = useState(false)
   const [coordinate,setCoordinate] = useState({
-    latitude : location ? location.latitude : 0,
-    longitude : location? location.longitude : 0,
+    latitude : "",
+    longitude : ""
   })
+
+  console.log(coordinate?.latitude,coordinate?.longitude,"YYYYYYYYYYYYYY")
   const [formData, setFormData] = useState({
     user:userId,
-    // birthdate: "",
-    // age: "",
-    // alternate_phone: "",
-    // gender: "",
     address: "",
     city: "",
     district: "",
@@ -64,6 +62,7 @@ const AddressPage = (props) => {
   });
 
   const handleCoordinateChange  = (longitude,latitude)=>{
+  
     setCoordinate({longitude,latitude})
   }
 
@@ -99,21 +98,18 @@ const AddressPage = (props) => {
   }
 
   const handleChooseLocation =()=>{
-    formData.latitude = location.latitude
-    formData.longitude =  location.longitude
+    formData.latitude = coordinate?.latitude
+    formData.longitude =  coordinate?.longitude
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    console.log(formData.latitude,"this is the form dtaa longitude")
-    console.log(formData.longitude,"this is the form dtaa longitude")
-    
-    console.log(formData, "lasttttt");
+    formData.latitude = coordinate?.latitude ? coordinate?.latitude : null
+    formData.longitude =  coordinate?.longitude ? coordinate?.longitude : null
+   
     const data_stringify = JSON.stringify(formData);
     console.log(data_stringify, "stringify");
-    console.log(userId, "IDDDDDD");
-    console.log(accessToken, "ACCESS");
     
 
     const response = axios.post(`/api/user/user-address/${userId}/`, data_stringify, {
@@ -153,50 +149,7 @@ const AddressPage = (props) => {
           <Card.Body>
             <h5 className="mb-4">Additional information</h5>
             <Form onSubmit={handleSubmit}>
-              {/* <Row className="align-items-center">
-                <Col sm={6} className="mb-3">
-                  <Form.Group controlId="birthdate">
-                    <Form.Label>Birthday</Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text>
-                        <FontAwesomeIcon icon={faCalendarAlt} />
-                      </InputGroup.Text>
-                      <Form.Control
-                        required
-                        type="text"
-                        name="birthdate"
-                        value={formData.birthdate}
-                        placeholder="mm/dd/yyyy"
-                        onChange={handleInputChange}
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Col>
-                <Col sm={6} className="mb-3">
-                  <Form.Group controlId="gender">
-                    <Form.Label>Gender</Form.Label>
-                    <Form.Select defaultValue="0" name="gender" onChange={handleInputChange}>
-                      <option value="">Gender</option>
-                      <option value="F">Female</option>
-                      <option value="M">Male</option>
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col onSubmit={6} className="mb-3">
-                  <Form.Group controlId="age">
-                    <Form.Label>Age</Form.Label>
-                    <Form.Control required type="text" placeholder="Age" name="age" onChange={handleInputChange} />
-                  </Form.Group>
-                </Col>
-                <Col sm={6} className="mb-3">
-                  <Form.Group controlId="phone">
-                    <Form.Label>Phone</Form.Label>
-                    <Form.Control required type="number" placeholder="+12-345 678 910" name="alternate_phone" onChange={handleInputChange} />
-                  </Form.Group>
-                </Col>
-              </Row> */}
+          
               <h5 className="my-4">Address</h5>
               <Row >
                 <Col sm={9} className="mb-3">
@@ -332,20 +285,18 @@ export  function AddressMap(props) {
 
       map.current.on('click', (event) => {
         const coordinates = event.lngLat;
-        console.log(coordinates)
+        console.log(coordinates,"@@@@@@@")
+        console.log(coordinates.lng,coordinates.lat,"@@@@@@@")
         setLng(coordinates.lng);
         setLat(coordinates.lat);
-        console.log('Longitude:', lng, 'Latitude:', lat);
+        console.log('Longitude:', lng, 'Latitude:', lat,"!!!!!!!!");
          
-        props.onCoordinateChnage(lng,lat)
+        props.onCoordinateChnage(coordinates.lng,coordinates.lat)
         
-        // here we are uplifiting the lat and lng which we have marked on map
 
-        // Remove existing markers before adding a new one
         map.current.getLayer('marker') && map.current.removeLayer('marker');
         map.current.getSource('marker') && map.current.removeSource('marker');
 
-        // Add a new marker
         map.current.addLayer({
           id: 'marker',
           type: 'circle',

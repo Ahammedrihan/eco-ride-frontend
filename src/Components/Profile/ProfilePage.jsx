@@ -1,4 +1,7 @@
 import React, { useState ,useEffect} from 'react';
+import DriverSideBar from "../Driver/driverSidebar";
+import axios from "../../Utils/axios"
+import UserProfileSideBar from '../User/UserProfileSidebar';
 import {
   MDBCol,
   MDBContainer,
@@ -11,13 +14,12 @@ import {
   MDBListGroupItem
   
 } from 'mdb-react-ui-kit';
-import DriverSideBar from "../Driver/driverSidebar";
-import axios from "../../Utils/axios"
-import UserProfileSideBar from '../User/UserProfileSidebar';
+
 
 export default function ProfilePage(props) {
   const [userData,setUserData] = useState(null)
   console.log(userData,"userData")
+
   
   useEffect (()=>{
     const response = axios.get(props.endPoint,{
@@ -75,7 +77,7 @@ export default function ProfilePage(props) {
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Second Name</MDBCardText>
+                    <MDBCardText>Last  Name</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{userData?.last_name}</MDBCardText>
@@ -101,15 +103,15 @@ export default function ProfilePage(props) {
                   </MDBCol>
                 </MDBRow>
                 
-                {/* <hr />
-                {userData?.profile_info ? 
+                <hr />
+                {/* {profile?
                 <>
                  <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Gender</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{ userData?.profile_info?.gender === "M" ?"Male":"Female" }</MDBCardText>
+                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{ profile?.gender === "M" ?"Male":"Female" }</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -118,7 +120,7 @@ export default function ProfilePage(props) {
                     <MDBCardText>Age</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{userData?.profile_info?.dob}</MDBCardText>
+                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{profile?.age}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 </>:null} */}

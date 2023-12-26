@@ -15,7 +15,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import img from "../../../../src/assets/Taxi2.jpg";
 import "./DriverActivate.css";
 import Stack from '@mui/material/Stack';
@@ -47,6 +46,8 @@ function DriverActive() {
     latitude: "",
     longitude: "",
   });
+
+  console.log(userLocationData,"?????????????")
 
 
   useEffect(() => {
@@ -114,7 +115,7 @@ function DriverActive() {
   };
 
   const buttonClickToSetDefaultAddress = async () => {
-    const response = await axios
+     await axios
       .get(`api/driver/driver/default-address/${driverId}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -122,14 +123,14 @@ function DriverActive() {
       })
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data);
+          console.log(response.data,"!!!!!!!!!!!!!!!!!!!!!!");
           setUserLocationData({
             latitude: response.data.latitude,
             longitude: response.data.longitude,
           });
           setLocationDetails({
             geometry: {
-              coordinates: [longitude, latitude],
+              coordinates: [response.data.longitude, response.data.latitude],
             },
           });
           setSelectedAddressType("default");

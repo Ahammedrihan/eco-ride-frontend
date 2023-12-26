@@ -72,7 +72,7 @@ export default function SignUp() {
             if (response.status === 201) {
               Swal.fire({
                 title: 'Success!',
-                text: 'The user details have been updated.',
+                text: 'eco-ride team has sent and otp to your email for verification.',
                 icon: 'success'
               }).then(() => {
                 console.log("helloooo")

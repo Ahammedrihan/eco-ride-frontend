@@ -26,13 +26,15 @@ import { display } from '@mui/system';
 
 const defaultTheme = createTheme();
 
-const VerifyOTP = (props) => {
+const VerifyOTP = () => {
    
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(100);
   const [otp, setOtp] = useState('');
   const navigate = useNavigate();
   const email = localStorage.getItem('randomUserEmail')
 
+
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -59,6 +61,7 @@ const VerifyOTP = (props) => {
 
 
   const verifyOtpSuccess = async()=>{
+   
 
     await axios.post('api/user/verify-otp/',{email,otp}
     ).then((response)=>{
@@ -90,8 +93,7 @@ const VerifyOTP = (props) => {
   }
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     verifyOtpSuccess()
     
 
@@ -116,9 +118,12 @@ const VerifyOTP = (props) => {
           <Typography component="h1" variant="h5">
             Verify OTP
           </Typography>
-          Time remaining: {timer} seconds {email}
+          <Typography component="h1" variant="h6">
+            {/* {email} */}
+          </Typography>
+         <strong>Time remaining: {timer} seconds </strong> 
 
-          <Box component="form"  noValidate sx={{ mt: 1 }}>
+          <Box component="form"  noValidate  onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -139,13 +144,11 @@ const VerifyOTP = (props) => {
               type="submit"
               fullWidth
               variant="contained"
-              onClick={()=>handleSubmit()}
+              // onClick={()=>handleSubmit()}
               sx={{ mt: 3, mb: 2 }}
             >
                 Submit Otp
             </Button>
-            
-           
           </Box>
         </Box>
       </Container>

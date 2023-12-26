@@ -84,7 +84,7 @@ function DriverVehicleList() {
           <div style={{ flexBasis: "20%" }}>
             <DriverSideBar />
           </div>
-        <div style={{ flexBasis: "70%", borderRadius: "10px"  }}>
+        <div style={{ flexBasis: "70%" }}>
 {/* ================================ALERT SECTION ON TOP OF TABLE============================ */}
         {showDeleteAlert && (
         <Alert severity="success" onClose={() => setShowDeleteAlert(false)}>
@@ -112,7 +112,7 @@ function DriverVehicleList() {
              )}
             {showAddVehicleForm  ? (
               <>
-               <Button onClick={handleAddVehicleClickFalse} style={{ marginLeft:"380px", backgroundColor:"#000",border:"none"}}>Back To Table</Button>
+               <Button onClick={handleAddVehicleClickFalse} style={{ marginLeft:"20px", backgroundColor:"#000",border:"none"}}>Back To Table</Button>
               <AddVehicle storeDetails={driverStoreDataFetch} onAddVehicle={handleAddVehicleAlert}  /> 
               </>
               ):
@@ -239,7 +239,7 @@ function Row(props) {
                     <TableCell align="right">
                       {" "}
                       <img
-                        src={img}
+                        src={vehicle?.vehicle_image1}
                         alt={`Vehicle ${vehicle.id}`}
                         style={{ width: "50px", height: "50px" }}
                       />

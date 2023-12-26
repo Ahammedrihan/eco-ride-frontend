@@ -15,11 +15,6 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button } from "react-bootstrap";
-import Stack from '@mui/material/Stack';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import {useSelector} from "react-redux"
 
 
@@ -27,20 +22,9 @@ function DriverAllTrips() {
 
   const driverStoreData = useSelector((store)=>store.driverauth.driverData)
   const accessToken = driverStoreData.data.access
-  const driverId = driverStoreData.driver.user_id
-
   const [allTrips,setAllTrips] = useState(null)
   const [isTripsAvailable,TripsAvailablesetIs] = useState(false)
   console.log(allTrips)
-
-
-
-
-
-useEffect(()=>{
-  driverAllTrips()
-
-},[])
 
   const driverAllTrips = async()=>{
     await axios.get('api/driver/driver/all-trips',{
@@ -53,24 +37,27 @@ useEffect(()=>{
         TripsAvailablesetIs(true)
       }else if(response.status === 204){
         TripsAvailablesetIs(false)
-        
       }
     })
   }
+
+useEffect(()=>{
+  driverAllTrips()
+},[])
 
   
   return (
     <div>
           <div style={{ display: "flex", paddingRight: "20px", paddingTop: "20px" }}>
-          <div style={{ flexBasis: "20%" }}>
-            <DriverSideBar />
-           </div>
+            <div style={{ flexBasis: "20%" }}>
+              <DriverSideBar />
+            </div>
           <div style={{  borderRadius: "10px"  }}></div>
-          {isTripsAvailable? 
+             {isTripsAvailable? 
              <CollapsibleTable allTrips={allTrips}/>:
-            <>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "40vh" }}>
-            <h3 >No trip history for this account</h3>
+               <>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "40vh" }}>
+            <h3 ></h3>
           </div>
           
             </>
@@ -83,24 +70,20 @@ export default DriverAllTrips
 
 
 function Row(props) {
-  const {trip,}= props
+  const {trip,index}= props
   const [open, setOpen] = React.useState(false);
-  const [simpleIndex,setSimpleIndex] = useState(0)
 
   const tripsEndDate = trip?.Trip_end_time
   const dateOfEndRide = new Date(tripsEndDate)
-  const tripDate = dateOfEndRide.getFullYear()+'-'+ (dateOfEndRide.getMonth()+1 ) +'-'+ dateOfEndRide.getDate()
  
   const formattedEndDate = dateOfEndRide.toISOString().slice(0, 19).replace("T", " ");
   const tripEndTime =  ''+formattedEndDate
 
-
   const tripstart = trip?.created_at
   const dateOfStart = new Date(tripstart)
-  const formattedStartDate = dateOfEndRide.toISOString().slice(0, 19).replace("T", " ");
+  const formattedStartDate = dateOfStart.toISOString().slice(0, 19).replace("T", " ");
   const tripStartTime =  ''+formattedStartDate
 
-   
     return (
       <React.Fragment>
          <TableRow style={{marginBottom:"30px"}}>
@@ -113,13 +96,13 @@ function Row(props) {
             </IconButton>
           </TableCell>
           <TableCell component="th" scope="row"  sx={{ color: "white" }}>
-            {simpleIndex+1}
+            {index+1}
           </TableCell>
           <TableCell align="center" sx={{ color: "white" }}>{trip?.start_location_name}</TableCell>
           <TableCell align="center" sx={{ color: "white" }}>{trip?.end_location_name}</TableCell>
           <TableCell align="center" sx={{ color: "white" }}>{trip?.total_distance} Km</TableCell>
           {/* <TableCell align="center" sx={{ color: "white" }}></TableCell> */}
-          <TableCell align="center" sx={{ color: "white" }}>{trip?.amount}</TableCell>
+          <TableCell align="center" sx={{ color: "white" }}>₹ {trip?.amount}</TableCell>
           <TableCell align="center" sx={{ color: "white" }}>{trip?.payment_status == true? 'Paid':'Pending'}</TableCell>
           <TableCell align="center" sx={{ color: "white" }}>{trip?.payment_method =="payafter"?" Pay After":"Online"}</TableCell>
           <TableCell align="center" sx={{ color: "white" }}>{trip?.id}</TableCell>
@@ -137,8 +120,8 @@ function Row(props) {
                       <TableCell sx={{ color: "white" }}></TableCell>
                       <TableCell sx={{ color: "white" }}>Start Time</TableCell>
                       <TableCell align="center"  sx={{ color: "white" }}>End Time</TableCell>
-                      <TableCell align="center" sx={{ color: "white" }}>User Id</TableCell>
-                      <TableCell align="center" sx={{ color: "white" }}>Vehicle Id</TableCell>
+                      <TableCell align="center" sx={{ color: "white" }}>User</TableCell>
+                      <TableCell align="center" sx={{ color: "white" }}>Vehicle Registration</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -147,8 +130,8 @@ function Row(props) {
                       </TableCell>
                       <TableCell  sx={{ color: "white" }}>{tripStartTime}</TableCell>
                       <TableCell align="center"  sx={{ color: "white" }}>{tripEndTime}</TableCell>
-                      <TableCell align="center"  sx={{ color: "white" }}>{trip?.user}</TableCell>
-                      <TableCell align="center"  sx={{ color: "white" }}>{trip?.vehicle}</TableCell>
+                      <TableCell align="center"  sx={{ color: "white" }}>{trip?.user?.first_name}</TableCell>
+                      <TableCell align="center"  sx={{ color: "white" }}>{trip?.vehicle?.registration_number}</TableCell>
 
                     </TableRow>
                   </TableBody>
@@ -208,8 +191,8 @@ function Row(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-            {allTrips.map((trip)=>(
-              <Row trip={trip} key={trip.id}/>
+            {allTrips.map((trip,index)=>(
+              <Row trip={trip} key={trip.id} index = {index}/>
             ))}
             </TableBody>
           </Table>

@@ -12,22 +12,22 @@ function Home() {
     <div>
       <Navbar/>
       <UserHomeCarousal/>
-      {/* <div style={{display:"flex"}}>
+      <div style={{display:"flex"}}>
       <div
         style={{
           backgroundImage: `url(${img})`,
           height: "540px",
           width:"1100px",
-          marginLeft:"-1px"
+          marginLeft:"-130px"
         }}
       ></div>
       <div>
-      
+      <h1>For Safe Rid</h1>
       </div>
 
 
 
-      </div> */}
+      </div>
       
      
       <WhyChoose/>

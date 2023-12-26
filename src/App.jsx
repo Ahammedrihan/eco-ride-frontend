@@ -31,7 +31,6 @@ import AddressDriver from './Containers/Driver/Address/AddressDriver.jsx';
 import DriverActive from './Containers/Driver/DriverActivate.jsx/DriverActive.jsx';
 import RequestRide from './Containers/User/RequestRide/RequestRide.jsx';
 import BookVehicle from './Containers/User/BookVehicle/BookVehicle.jsx';
-import DriverTrip from './Containers/Driver/Trips/DriverTrip.jsx';
 import BasicModal from './Components/Driver/DriverRules.jsx';
 import DriverAllTrips from './Containers/Driver/Trips/DriverAllTrips.jsx';
 import UserTripDetails from './Containers/User/Trips/Trips.jsx';
@@ -83,7 +82,6 @@ const Routers = ()=>{
           <Route element= {<PrivateDriverRoute/>} >
     
           <Route path='/driver/home' element = {<DriverHome/>}/>
-          <Route path='/driver/trips' element = {<DriverTrip/>}/>
           <Route path='/driver/all/trips' element = {<DriverAllTrips/>}/>
           <Route path='/driver/profile' element = {<DriverProfile/>}/>
           <Route path='/driver/add-vehicle' element = {<AddVehicle/>}/>
