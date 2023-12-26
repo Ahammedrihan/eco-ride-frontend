@@ -4,7 +4,7 @@ import UserHomeCarousal from '../../Components/User/HomeCarousal/UserHomeCarousa
 import WhyChoose from '../../Components/User/HomeCarousal/WhyChoose'
 import Faq from '../../Components/User/Faq'
 
-import img from "../../assets/Pool.Webp";
+// import img from "../../assets/Pool.Webp";
 
 
 function Home() {
@@ -13,14 +13,14 @@ function Home() {
       <Navbar/>
       <UserHomeCarousal/>
       <div style={{display:"flex"}}>
-      <div
+      {/* <div
         style={{
           backgroundImage: `url(${img})`,
           height: "540px",
           width:"1100px",
           marginLeft:"-130px"
         }}
-      ></div>
+      ></div> */}
       <div>
       <h1>For Safe Rid</h1>
       </div>
