@@ -1,27 +1,42 @@
 .container {
     display: flex;
     
-  }
-  
-  .left-parent {
-    flex: 1 0 70%; /* Adjust as needed */
-  
     
   }
   
-  .right-parent  {
-    flex: 1 0 30%; /* Adjust as needed */
+  .left-parent {
+    flex:  70%; 
+  
   }
   
-  /* Media query for screens smaller than a certain width */
-  @media (max-width:800px) {
+  .right-parent  {
+    flex: 30%; 
+  }
+  
+  @media (max-width:600px) {
     .container {
-      flex-direction: column; /* Switch to column layout */
+      flex-direction:column;
     }
   
     .left,
     .right {
-      flex: 1 0 100%; /* Take up full width in column layout */
+      flex: 1 0 100%; 
     }
   }
-  
+
+
+
+
+
+
+
+    
+    
+
+
+@media(max-width:600px){
+    .container{
+        flex-direction: column;
+    }
+}
+

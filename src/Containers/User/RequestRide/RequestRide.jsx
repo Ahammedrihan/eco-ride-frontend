@@ -65,6 +65,7 @@ function RequestRide() {
   const [isactiverDrivers, setIsActiveDrivers] = useState(false)
   const [userSelectDefaultAddress, setUserSelectDefaultAddress] = useState(false);
   const [ismodalOpen, IssetModalOpen] = useState(false);
+  const [wheatherUserHaveDefaultAddress,setWheatherUserHaveDefaultAddress] = useState(false);
   const [activerDrivers, setActiveDrivers] = useState([{
     driverId:"",
     driverDistance : "",
@@ -133,8 +134,20 @@ function RequestRide() {
           setIsActiveDrivers(true)
 
 
-        } else {
+        } if (response.status === 204) {
           console.log("failed");
+          Swal.fire({
+            title: "No Drivers Found",
+            text: "Due to heavy booking no drivers are active",
+            icon: "error",
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'try later'
+          }).then((result)=>{
+            if (result.isConfirmed){
+              navigate('/')
+            }
+          });
+          
         }
       })
       .catch((error) => {
@@ -183,25 +196,8 @@ function RequestRide() {
   };
 
 
-
-  // const handleUserSelectDefaultAddressToggle = () => {
-  //   setUserSelectDefaultAddress((prev) => !prev);
-
-  //   if (userSelectDefaultAddress){
-  //     const { latitude, longitude } = userDefaultLatLng;
-
-  //     setUserSelectDefaultAddressData({
-  //       geometry: {
-  //         coordinates: [longitude, latitude],
-  //       },
-  //     });
-      
-  //   };
-
-  // }
-
     useEffect(() => {
-      if (userSelectDefaultAddress){
+      
       const UserDeaultAddressFetch = async () => {
         await axios
           .get("api/user/user-default-address", {
@@ -214,6 +210,8 @@ function RequestRide() {
               console.log("default address");
               console.log(response.data, "default address");
               setUserDefaultLatLng(response.data);
+              setWheatherUserHaveDefaultAddress(true)
+
             } else {
               console.log(" address failed");
             }
@@ -221,26 +219,27 @@ function RequestRide() {
           .catch((error) => {
             console.log("error address :", error);
             const reason = error.response.data.message
-            Swal.fire({
-              title : reason,
-              text : "Set default address In profile",
-              icon : "error",
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes'
-            }).then((result)=>{
-              if(result.isConfirmed){
-                navigate('/address')
-              }else if (result.dismiss) {
-                // User clicked "Cancel" or closed the modal
-                setUserSelectDefaultAddress(false);              }
-            })
+            setWheatherUserHaveDefaultAddress(false)
+            // Swal.fire({
+            //   title : reason,
+            //   text : "Set default address In profile",
+            //   icon : "error",
+            //   showCancelButton: true,
+            //   confirmButtonColor: '#3085d6',
+            //   cancelButtonColor: '#d33',
+            //   confirmButtonText: 'Yes'
+            // }).then((result)=>{
+            //   if(result.isConfirmed){
+            //     navigate('/address')
+            //   }else if (result.dismiss) {
+            //     // User clicked "Cancel" or closed the modal
+                setUserSelectDefaultAddress(false);              
+          
           });
       };
       UserDeaultAddressFetch();
-    }
-    }, [userSelectDefaultAddress]);
+   
+    }, []);
     
     
 
@@ -252,10 +251,11 @@ function RequestRide() {
         <div
           className="left-parent"
           style={{
-            width: "600px",
-            paddingTop: "20px",
+            width: "400px",
+            paddingTop: "30px",
             marginRight: "60px",
-            marginLeft: 0,
+            marginLeft: "40px",
+            
           }}
         >
           <MapComponent
@@ -273,10 +273,10 @@ function RequestRide() {
         <div className="right-parent " style={{ paddingTop: "20px" }}>
           <Card
             style={{
-              borderColor: "black",
+              borderColor: "grey",
               borderWidth: "2px",
               borderStyle: "solid",
-              width: "350px",
+              width: "330px",
               borderRadius: "20px",
             }}
           >
@@ -296,18 +296,10 @@ function RequestRide() {
 
               <Typography color="text.secondary">
                 Set default address as starting point
-                {/* <Stack
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  sx={{ px: 2, py: 1, bgcolor: 'background.default' }}
-                > */}
-
-{/* 
-              <Switch
-                      checked={userSelectDefaultAddress}
-                      onChange={handleUserSelectDefaultAddressToggle}
-                    /> */}
+              
+                    {wheatherUserHaveDefaultAddress ? 
+                    (
+                      <>
                       {userSelectDefaultAddress ?(
                          <Switch
                          checked={userSelectDefaultAddress}
@@ -317,29 +309,18 @@ function RequestRide() {
                       <Switch
                       checked={userSelectDefaultAddress}
                       onChange={handleUserSelectDeaultAddressTurnOn}
-                    />}    
+                    />}   
+                   </> ):null} 
 
-                {/* {userSelectDefaultAddress ? (
-                  <Switch onClick={handleUserSelectDeaultAddressTurnOff} />
-                ) : (
-                  <Switch onClick={handleUserSelectDeaultAddressTurnOn} />
-                )} */}
+              
+              {wheatherUserHaveDefaultAddress ? 
+              (
                    <Chip
                   label={userSelectDefaultAddress ? 'Default Address' : "Click for default address"}
                   color={userSelectDefaultAddress ? 'success' : 'default'}
                   size="small"
-                />
-{/* 
-                {userSelectDefaultAddress ? (
-                  <button onClick={handleUserSelectDeaultAddressTurnOff}>
-                  make flase= {userSelectDefaultAddress}
-                  </button>
-                ) : (
-                  <button onClick={handleUserSelectDeaultAddressTurnOn}>
-                    make True = {userSelectDefaultAddress}
-                  </button>
-                )} */}
-                {/* </Stack> */}
+                />):null}
+
               </Typography>
 
               <div style={{ margin: "10px" }}>
@@ -515,7 +496,7 @@ export const MapComponent = (props) => {
     const defaultStartingPoint = [76.4901, 9.9425176];
     const map = new mapboxgl.Map({
       container: "map",
-      style: "mapbox://styles/mapbox/streets-v12",
+      style: "mapbox://styles/ahammedrihancm/clqmbde7v00qj01nwhemxd9yf",
       center: defaultStartingPoint,
       zoom: 13,
     });
