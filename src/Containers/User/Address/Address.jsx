@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AddressPage from "../../../Components/Profile/AddressPage";
 import UserProfileSideBar from "../../../Components/User/UserProfileSidebar";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axios from "../../../Utils/axios";
 import { userProfileurl } from "../../../Utils/urls";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
