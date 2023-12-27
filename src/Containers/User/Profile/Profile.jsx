@@ -28,8 +28,10 @@ function Profile() {
   const [userProfileAvailable,setUserProfileAvailable] = useState(null)
   const userStoreData = useSelector((store)=> store.authuser.userData)
   const userId = userStoreData.user.user_id;
+  console.log(userId)
   const userAccessToken = userStoreData.data.access;
-  const path = `${userProfileurl}+${userId}/`
+
+  const path = `${userProfileurl}${userId}`
   const role = userStoreData.user.role
 
   const [open, setOpen] = React.useState(false);
