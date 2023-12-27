@@ -374,11 +374,11 @@ export function SwipePOP(props) {
           <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
           Joined Date :  <b>{driver.driverBasicDetails.date_joined}</b>
           </Typography>
-          <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
+          {/* <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
          Gender &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
-          </Typography>
-          <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
-          </Typography>
+          </Typography> */}
+          {/* <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
+          </Typography> */}
       
           </div>
           <div style={{flex:1}} className="right"   >
@@ -388,7 +388,7 @@ export function SwipePOP(props) {
           
           <Typography variant="body2" color="black" sx={{ mt: 3,fontSize:"16px" }}>
           From &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<span>
-  {originLocation.name} {originLocation.street} {originLocation.city}{' '}
+  <b>{originLocation.name} {originLocation.street} {originLocation.city}{' '}</b>
   
 </span>
           
