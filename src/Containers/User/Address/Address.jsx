@@ -22,10 +22,11 @@ function Address() {
   const userStoreData = useSelector((state) => state.authuser.userData);
   const userId = userStoreData.user.user_id;
   const userAccessToken = userStoreData.data.access;
-  const path = `${userProfileurl}${userId}/`;
+  const path = `${userProfileurl}${userId}`;
   console.log(path)
 
   const [userAddress, setUserAddress] = useState([]);
+  console.log(userAddress)
 
 
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
@@ -41,6 +42,7 @@ function Address() {
           headers: {
             Authorization: `Bearer ${userAccessToken}`,
           },
+         
         })
         .then((response) => {
           if (response.status === 200) {
