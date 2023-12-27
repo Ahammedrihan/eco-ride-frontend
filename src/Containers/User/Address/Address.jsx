@@ -37,7 +37,7 @@ function Address() {
   useEffect(() => {
     const fetchUserAddress = async () => {
       const response = await axios
-        .get(path, {
+        .get(`api/user/profile/${userId}/`, {
           headers: {
             Authorization: `Bearer ${userAccessToken}`,
           },

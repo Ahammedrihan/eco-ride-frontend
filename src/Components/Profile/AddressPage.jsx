@@ -77,6 +77,7 @@ const AddressPage = (props) => {
     const data_stringify = JSON.stringify(formData);
     console.log(data_stringify, "stringify");
     
+
      axios.post(`/api/user/user-address/${userId}/`, data_stringify, {
       headers: {
         'Content-Type': "application/json",
