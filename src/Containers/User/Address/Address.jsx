@@ -23,6 +23,7 @@ function Address() {
   const userId = userStoreData.user.user_id;
   const userAccessToken = userStoreData.data.access;
   const path = `${userProfileurl}${userId}/`;
+  console.log(path)
 
   const [userAddress, setUserAddress] = useState([]);
 
