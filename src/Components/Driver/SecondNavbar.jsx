@@ -37,9 +37,9 @@ function SecondNavbar() {
       <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Nav className="me-auto">
-            <Nav.Link as={Link}  onClick={handleModalOpen}>Rules</Nav.Link>
+            <Nav.Link as={Link}  onClick={handleModalOpen}>Driver Rules</Nav.Link>
             <Nav.Link href="#features">Blog</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="#pricing"> Rent Pricing</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

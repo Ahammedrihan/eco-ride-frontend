@@ -13,11 +13,7 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button } from "react-bootstrap";
-import Stack from '@mui/material/Stack';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+
 import {useSelector} from "react-redux"
 import UserProfileSideBar from "../../../Components/User/UserProfileSidebar";
 
@@ -65,8 +61,11 @@ export default UserActiveRide
 
 function Row(props) {
   const {allTrips}= props
+  console.log(allTrips)
   const [open, setOpen] = React.useState(false);
   const [simpleIndex,setSimpleIndex] = useState(0)
+  const [tripData,setTripData] = useState(allTrips ||null)
+  console.log(tripData,",dj")
 
 //   const tripsEndDate = allTrips?.Trip_end_time
 //   const dateOfEndRide = new Date(tripsEndDate)
@@ -84,9 +83,12 @@ function Row(props) {
    
     return (
       <React.Fragment>
+            { tripData?.start_location_name? <>
          <TableRow style={{marginBottom:"30px"}}>
+     
           <TableCell>
-            <IconButton
+            
+              <IconButton
               aria-label="expand row"
               size="small"  sx={{ color: "white" }}
               onClick={() => setOpen(!open)}>
@@ -99,7 +101,6 @@ function Row(props) {
           <TableCell align="center" sx={{ color: "#c2b7cc"}}>{allTrips?.start_location_name}</TableCell>
           <TableCell align="center" sx={{ color: "#c2b7cc" }}>{allTrips?.end_location_name}</TableCell>
           <TableCell align="center" sx={{ color: "#c2b7cc"}}>{allTrips?.total_distance} Km</TableCell>
-          {/* <TableCell align="center" sx={{ color: "white" }}></TableCell> */}
           <TableCell align="center" sx={{ color: "#c2b7cc" }}>₹ {allTrips?.amount}</TableCell>
           <TableCell align="center" sx={{ color: "#c2b7cc" }}>{allTrips?.payment_status == true? 'Completed':'Pending'}</TableCell>
           <TableCell align="center" sx={{ color: "#c2b7cc" }}>{allTrips?.payment_method =="payafter"?" Pay After":"Online"}</TableCell>
@@ -139,8 +140,23 @@ function Row(props) {
                 </Table> */}
               </Box>
             </Collapse>
-          </TableCell>
+            </TableCell>
         </TableRow>
+
+        </> : <>
+        <TableRow>
+        <TableCell align="center" sx={{ color: "#c2b7cc" }}> </TableCell>
+        <TableCell align="center" sx={{ color: "#c2b7cc" }}></TableCell>
+        <TableCell align="center" sx={{ color: "#c2b7cc" }}> </TableCell>
+        <TableCell align="center" sx={{ color: "#c2b7cc" }}></TableCell>
+        <TableCell align="center" sx={{ color: "#c2b7cc" }}></TableCell>
+        <TableCell align="center" sx={{ color: "#c2b7cc" }}>No Active Rides</TableCell>
+        <TableCell align="center" sx={{ color: "#c2b7cc" }}> </TableCell>
+        <TableCell align="center" sx={{ color: "#c2b7cc" }}></TableCell>
+
+        </TableRow>
+        </>
+}
       </React.Fragment>
     );
   }
@@ -190,9 +206,6 @@ function Row(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-            {/* {allTrips?.map((trip)=>(
-              <Row trip={trip} key={trip.id}/>
-            ))} */}
              <Row allTrips={allTrips} key={allTrips.id}/>
             </TableBody>
           </Table>

@@ -1,5 +1,4 @@
 import  React from 'react';
-import PropTypes from 'prop-types';
 import { Global } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,14 +15,10 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { loadRazorPayScript,createRazorPayOrder } from '../../../Utils/Razorpay';
-import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-
+import { useNavigate } from 'react-router-dom';
 
 
 const style = {
@@ -34,33 +29,22 @@ const style = {
     width: 900,
     outerHeight:500,
     height: 550, 
-  
     bgcolor: '#706565',
     border: 'px solid #000',
     boxShadow: 24,
-  
-  
-  
   '@media(max-width : 900px)':{
-      width: '95%', // Adjust the width for smaller screens
-      padding: '16px', // Add padding from the ends
+      width: '95%', 
+      padding: '16px', 
     },
   }
 
-
-
-
-
 const drawerBleeding = 56;
-
 const Root = styled('div')(({ theme }) => ({
   height: '100%',
   backgroundColor:
     theme.palette.mode === 'light' ? grey[100] : theme.palette.background.default,
 }));
-
 const StyledBox = styled(Box)(({ theme }) => ({
-    
   backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
 }));
 
@@ -75,17 +59,13 @@ const Puller = styled(Box)(({ theme }) => ({
 }));
 
 
-
 export function SwipePOP(props) {
-
- 
-
   const { window,driver,distance,destinationLocation,originLocation,userAccessToken,userId } = props;
   const [open, setOpen] = useState(true);
   const [travelAmount,settravelAmount] = useState(null)
   const [selectedPaymentMethod,setSelectedPaymentMethod] = useState('')
   const [razorpayPaymentDetails,setRazorpayPaymentDetails] = useState()
-
+  const navigate = useNavigate()
 
   const handlePaymentMethodChange = (value)=>{
     setSelectedPaymentMethod(value);
@@ -113,8 +93,6 @@ export function SwipePOP(props) {
     razorpay_order_id : razorpayPaymentDetails ? razorpayPaymentDetails?.razorpay_order_id : null,
     razorpay_payment_id : razorpayPaymentDetails ? razorpayPaymentDetails?.razorpay_payment_id : null,
     total_distance : distance.distance
-
-
 }
 
   const verifyUserOnRide = async(driverId,amount,userAccessToken,userId)=>{
@@ -134,11 +112,8 @@ export function SwipePOP(props) {
           text: 'Only one trip same time allowed',
           icon: 'error'
         })
-
       }
-
     })
-
   }
   
 
@@ -159,8 +134,6 @@ export function SwipePOP(props) {
           console.log(response)
           setRazorpayPaymentDetails(response)
           handleBooking()
-
-          
       },
 
       prefill: {
@@ -204,7 +177,7 @@ export function SwipePOP(props) {
           icon: 'success'
         })
         onClose()
-        
+        navigate('/')
       }
     }).catch((error)=>{
       if (error.response && error.response.data){
@@ -214,14 +187,9 @@ export function SwipePOP(props) {
           text: 'Only one trip same time allowed',
           icon: 'error'
         })
-
       }
-
     })
-    
   }
-
-
 
   useEffect(()=>{
     const tripDistance = async()=>{
@@ -250,11 +218,9 @@ export function SwipePOP(props) {
   if (open == false){
       onClose();
   }
-
   const onClose = () => {
     setOpen(false);
   };
-
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -264,7 +230,6 @@ export function SwipePOP(props) {
       <Global
         styles={{
           '.MuiDrawer-root > .MuiPaper-root': {
-            // height: `calc(50% - ${drawerBleeding}px)`,
             height: '70vh',
             overflow: 'visible',
           },
@@ -272,7 +237,6 @@ export function SwipePOP(props) {
       />
       
       <Box sx={{ textAlign: 'center', pt: 1 }}>
-        {/* <Button onClick={toggleDrawer(true)}>Open</Button> */}
       </Box>
       <SwipeableDrawer
         container={container}
@@ -311,29 +275,20 @@ export function SwipePOP(props) {
             
           }}
         >
-
         <Box >
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      
-        
         <Button  sx={{ ml: 1, width: 100, height: 30 }} onClick={() => onClose()}>
           Go back
         </Button>
-      
           </div>
-       
             <div style={{ height:2, backgroundColor:"",borderRadius:"10px" }}>
           {/* <Typography id="modal-modal-title" variant="h6" component="h2" style={{display: "flex",color:"white",alignContent:"center",justifyContent: "center"}}>
           </Typography> */}
-
-
           <div style={{ justifyContent: 'space-between',  padding: '0 40px' }} className='container' >
-
             <div style={{flex:1}} className="left" >
           <Typography id="modal-modal-description" sx={{ mt: 4}} style={{fontSize: '25px', textAlign: 'center' ,fontWeight:'bold'}}>
             Vehicle Details
           </Typography>
-
           <Typography variant="body2" color="black"  sx={{ mt: 3  , fontSize:"16px"}}>
           Vehicle Name &nbsp; :&nbsp; {driver.driverVehicleDetails.vehicle_name}
           </Typography>
@@ -355,16 +310,12 @@ export function SwipePOP(props) {
           <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
           Vehicle Model &nbsp;&nbsp;:&nbsp;    {driver.driverVehicleDetails.vehicle_year}
           </Typography>
-
           <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
           Vehicle id &nbsp;&nbsp;:&nbsp;    {driver.driverVehicleDetails.id}
           </Typography>
-
-        
           <Typography id="modal-modal-description" sx={{ mt: 4 }} style={{fontSize: '25px', textAlign: 'center', fontWeight:"bold" }}>
            Driver Details
           </Typography>
-
           <Typography variant="body2" color="black"  sx={{ mt: .5,fontSize:"16px" }}>
           First Name  &nbsp;&nbsp;:  <b>{driver.driverBasicDetails.first_name}</b>
           </Typography>
@@ -374,12 +325,6 @@ export function SwipePOP(props) {
           <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
           Joined Date :  <b>{driver.driverBasicDetails.date_joined}</b>
           </Typography>
-          {/* <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
-         Gender &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
-          </Typography> */}
-          {/* <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
-          </Typography> */}
-      
           </div>
           <div style={{flex:1}} className="right"   >
           <Typography id="modal-modal-description" sx={{ mt: 4 }} style={{fontSize: '25px', textAlign: 'center', fontWeight:"bold" }}>
@@ -388,9 +333,9 @@ export function SwipePOP(props) {
           
           <Typography variant="body2" color="black" sx={{ mt: 3,fontSize:"16px" }}>
           From &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;<span>
-  <b>{originLocation.name} {originLocation.street} {originLocation.city}{' '}</b>
-  
-</span>
+          <b>{originLocation.name} {originLocation.street} {originLocation.city}{' '}</b>
+          
+        </span>
           
           </Typography>
           <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>

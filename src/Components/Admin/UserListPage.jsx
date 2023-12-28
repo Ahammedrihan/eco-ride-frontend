@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import axios from "../../Utils/axios";
 import AdminSideBar from "../../Components/Admin/AdminSideBar";
-
 import Button from '@mui/material/Button';
 
 function UserListPage( props) {
@@ -163,7 +162,7 @@ function UserListPage( props) {
                       </Button>
                       )}
 
-        </td>
+                   </td>
                   </tr>
                 ))
               ) : (

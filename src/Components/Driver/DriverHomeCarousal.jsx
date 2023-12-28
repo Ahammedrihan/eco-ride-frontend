@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import img from  '../../assets/car4.jpg'
 
 function DriverHomeCarousal() {
 
@@ -30,15 +31,15 @@ function DriverHomeCarousal() {
 
   return (
     <>
-      <div style={styles.container}>
+      <div style={{...styles.container,backgroundImage: `url(${img})`,
+          height: "450px"}}>
         <div style={styles.leftSection} >
-          <div style={{ color: "white", paddingLeft: "40px", paddingRight: "20px", paddingTop: "40px" }}>
-            <h1 style={{ fontWeight: "500", fontSize: "35px" }}> You're our hero navigating the journey of possibilities.</h1>
-            <button style={{ backgroundColor: "white", border: "none", height: "40px", width: "140px", marginTop: "30px", fontWeight: "600", fontSize: "15px", borderRadius: "5px" }} onClick={getStartFunctionHandle}> Get Started</button>
+          <div style={{ color: "white", paddingLeft: "40px", paddingRight: "50px", paddingTop: "60px" }}>
+            <h1 style={{ fontWeight: "600", fontSize: "40px",border:"black" }}> You're our hero navigating the journey of possibilities.</h1>
+            <button style={{ backgroundColor: "black", border: "none", height: "40px", width: "140px", marginTop: "30px", fontWeight: "600",color:"white", fontSize: "15px", borderRadius: "5px" }} onClick={getStartFunctionHandle}> Get Started</button>
           </div>
         </div>
         <div style={styles.rightSection} >
-          Right Section
         </div>
       </div>
     </>
@@ -46,3 +47,10 @@ function DriverHomeCarousal() {
 }
 
 export default DriverHomeCarousal;
+
+<div
+        style={{
+          backgroundImage: `url(${img})`,
+          height: "800px",
+        }}
+      ></div>

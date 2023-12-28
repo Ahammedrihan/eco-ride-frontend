@@ -25,7 +25,6 @@ function Profile() {
     boxShadow: 24,
     p: 4,
   };
-  const [userProfileAvailable,setUserProfileAvailable] = useState(null)
   const userStoreData = useSelector((store)=> store.authuser.userData)
   const userId = userStoreData.user.user_id;
   console.log(userId)
@@ -111,7 +110,7 @@ function Profile() {
               cancelButtonText: 'Remind me later'
             }).then((result)=>{
               if (result.isConfirmed){
-                setOpen(true)
+                handleOpen(true)
               }
             })
 
@@ -129,8 +128,11 @@ function Profile() {
   
 
   return (
+    <div>
+
+   
     <div >
-      <ProfilePage endPoint ={path} accessToken={userAccessToken} role={role}/>
+      <ProfilePage endPoint ={path} accessToken={userAccessToken} userId={userId} role={role}/>
       {open ?
       <div>
 
@@ -195,6 +197,10 @@ function Profile() {
         </Box>
       </Modal>
     </div>:null}
+
+    
+    </div>
+    
     </div>
   )
 }

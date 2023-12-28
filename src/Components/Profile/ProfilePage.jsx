@@ -14,11 +14,24 @@ import {
   MDBListGroupItem
   
 } from 'mdb-react-ui-kit';
+import { Button } from 'react-bootstrap';
+import ProfileEdit from '../../Containers/User/Profile/ProfileEdit';
 
 
 export default function ProfilePage(props) {
   const [userData,setUserData] = useState(null)
+  const [isOpenModal,setIsOpenModal] = useState(false)
+  console.log(isOpenModal,"IS MODLA OPEN")
   console.log(userData,"userData")
+
+
+  const handleModalOpen = ()=>{
+    setIsOpenModal(true)
+
+  }
+  const handleModalClose = () => {
+    setIsOpenModal(false);
+  };
 
   
   useEffect (()=>{
@@ -36,8 +49,13 @@ export default function ProfilePage(props) {
     })
   },[])
 
+
   return (
     <section style={{ backgroundColor: '#eee', }}>
+      {isOpenModal ? 
+      <ProfileEdit onClose={handleModalClose} token = {props.accessToken} userId = {props.userId} data = {userData}/>:null
+      }
+
      <MDBContainer className="pt-5">
      <div style={{ display: 'flex'}}>
      <div className="container-fluid">
@@ -60,7 +78,11 @@ export default function ProfilePage(props) {
                 <p className="text-muted mb-1" style={{fontWeight:"bold"}}>Welcome {userData?.first_name}</p>
                 <div className="d-flex justify-content-center mb-2">
                 </div>
+
+                <Button style={{width:"100px",marginRight:"10px",backgroundColor:"green",border:"none"}} onClick={()=>handleModalOpen()}>Update</Button>
+               <Button style={{width:"100px",backgroundColor:"red",border:"none"}}>Logout</Button>
               </MDBCardBody>
+
             </MDBCard>
           </MDBCol>
           <MDBCol md="6"  lg="12">

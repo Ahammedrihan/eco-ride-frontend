@@ -39,6 +39,7 @@ import ResetPasswordDriver from './Containers/Driver/ResetPasswordDriver/ResetPa
 import AdminVehicleList from './Containers/Admin/Home/AdminVehicleList.jsx';
 import VerifyOTP from './Containers/User/VerifyOtp.jsx';
 import UserActiveRide from './Containers/User/UserActiveRide/UserActiveRide.jsx';
+import EditForm from './Containers/User/Profile/ProfileEdit.jsx';
 const Routers = ()=>{
 
   return(
@@ -54,6 +55,7 @@ const Routers = ()=>{
         <Route path='/location' element={<LocationComponent/>} />
             <Route element={<PrivateRouteUser/>}>
               <Route path='/profile' element={<Profile/>} />
+              <Route path='/edit-profile' element={<EditForm/>} />
               <Route path='/reset-password' element={<ResetPasswordUser/>} />
               <Route path='/address' element={<Address/>} />
               <Route path='/request-ride' element={<RequestRide/>} />

@@ -581,8 +581,6 @@ function DriverActive() {
              <Typography variant="body2" color="text.secondary">
                      Have you collected money ?
                 <Button onClick={handleHaveYouCollectMoney}>yes</Button> </Typography> 
-                    
-
             </>:""
              }
             {
@@ -604,8 +602,6 @@ function DriverActive() {
             </>:<Typography  sx={{ color: "green" }}>
                       Ride completed
                     </Typography>}
-            
-                  
                   </Box>
                 </div>
               </CardContent>

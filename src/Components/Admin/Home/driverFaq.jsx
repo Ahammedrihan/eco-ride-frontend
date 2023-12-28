@@ -6,7 +6,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function Faq() {
+export default function DriverFaq() {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -23,19 +23,18 @@ export default function Faq() {
           id="panel1bh-header"
         >
           <Typography sx={{ flexShrink: 0 ,fontFamily:"inherit",fontWeight:"500"}}>
-          How to request a ride?
+          How to get a ride ?
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography sx={{ color: 'text.secondary' ,fontSize:""}}>
-          <h5>To request an eco-ride follow the next steps:</h5>
+          <h5>To became a driver with eco-ride follow these steps:</h5>
 
-          Open the eco-ride web app tap request ride button on the home page.
-          Where you can see an userfriendly map navigation map where you have options to enter “ enter pickup location” and destination “ enter destination location” 
-          the application will check your entered places and also on the right part you have an option for select "Default address".
-          Once you set your location there is an option to find the nearyby drivers. By clicking you can see the nearby drivers with your location.
-          you can confirm driver by clicking on the the popup shown on map. Once you have selected your driver you can see more details about the vehicle
-          along the driver and travel details, also you have an option for payment either you can pay by Online or After ride
+          Open the eco-ride web app create a driver account. Once you have succesfully sign in . In driver home page you can see a <b>Get started</b> button it is the initial setup for getting driver live.
+          before click the get start button you have to make sure that you have already added a default address and vehicle. If not, create it first. Once you have done that 
+          you can come back to hame page and click on the Get started button later you redirected to your loation activation page. where you can see two opttions for choosing active location address.
+          you have options like <b>Choose Cuurent Location</b> and <b>Choose Default Address</b> Once you have choosed the option your location became live and your location will listed in user side. Once user books
+          driver get notifiation on the same page.
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -45,15 +44,14 @@ export default function Faq() {
           aria-controls="panel2bh-content"
           id="panel2bh-header"
         >
-          <Typography sx={{ flexShrink: 0,fontFamily:"inherit",fontWeight:"500" }}>How to pay online ?</Typography>
+          <Typography sx={{ flexShrink: 0,fontFamily:"inherit",fontWeight:"500" }}>How many trips I can take in a day ?</Typography>
 
         </AccordionSummary>
         <AccordionDetails>
           <Typography sx={{ color: 'text.secondary',fontSize:"" }}>
-           Once you have selected your car as per matching requirmments. You can see
-           there is an option to make payment, either you can pay through online or you can pay afther ride 
-           if you are planning to pay through online payment, you have to select the payment mode like Debit, Credit, Upi.
-           Once you choose the model all you need you enter you basic credentials. <b> Always aware that we don't have any hidden charges and also our service providers will never contact you for bank credentials </b> 
+          There is no limitaions in number of trips Which you can take. You can take pleanty of drives according to your convenience. 
+          But we suggest you to take appropriate rest ans sleep before each trip. We bother your and user health
+        
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -64,15 +62,15 @@ export default function Faq() {
           id="panel3bh-header"
         >
           <Typography sx={{ flexShrink: 0 ,fontFamily:"inherit",fontWeight:"500"}}>
-            How secure is my data ?
+            How do you connect users with drivers?
           </Typography>
        
         </AccordionSummary>
         <AccordionDetails>
           <Typography sx={{ color: 'text.secondary',fontSize:"" }}>
-            We only store  data which you have provided during the time of registration and booking time.
-            We store those data to improve the user experience for the next time. We won't share you personal data 
-            with any third part applications
+            We have a inteligent trip planning system which the the user can see each nearby driver in the map.
+            Once the user like you profile and you vehicle user can book taxi.
+
         
           </Typography>
         </AccordionDetails>
@@ -87,9 +85,7 @@ export default function Faq() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography sx={{ color: 'text.secondary',fontSize:"" }}>
-            You won't have any kind of hidden charges, We charge user on the basics of 
-            which type of vehicle you opted for ride. If driver asks any kind of additional charges 
-            other than amount showing on website you a wont't need to pay money. Instead report those drivers
+        We calcute cab rent on the basic of your vehicle features
 
           </Typography>
         </AccordionDetails>

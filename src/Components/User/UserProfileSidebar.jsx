@@ -21,6 +21,7 @@ import { NavLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { useState, useEffect } from "react";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const drawerWidth = 100;
 
@@ -174,9 +175,17 @@ const UserProfileSideBar = () => {
             
           </div>
         )}
-        <NavLink to="/">
-        <h6 style={{fontSize:"small",textAlign:"end",paddingRight:"20px",paddingTop:"40px"}} onClick={()=>{na}}> Back to home</h6>
-        </NavLink>
+      
+
+        <NavLink to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '10px', paddingTop: '40px' }}>
+        <ArrowBackIcon fontSize="small" />
+      {/* <div>
+        <h6 style={{ fontSize: 'small', margin: '0',padding:"10px" }} >Home</h6>
+      </div> */}
+     
+    </NavLink>
+       
+     
       </Drawer>
 
     </ThemeProvider>

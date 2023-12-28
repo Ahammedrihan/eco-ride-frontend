@@ -130,6 +130,8 @@ export default DriverVehicleList;
 
 
 function Row(props) {
+  const baseUrl = "http://localhost:8000";  
+
   const { vehicle, accessToken ,userVehicle,driverId} = props;
   const [open, setOpen] = React.useState(false);
 
@@ -237,13 +239,15 @@ function Row(props) {
                     <TableCell  sx={{ color: "white" }}>{vehicle.vehicle_year}</TableCell>
                     <TableCell align="right"  sx={{ color: "white" }}>{vehicle.vehicle_type}</TableCell>
                     <TableCell align="right">
-                      {" "}
-                      <img
-                        src={vehicle?.vehicle_image1}
-                        alt={`Vehicle ${vehicle.id}`}
-                        style={{ width: "50px", height: "50px" }}
-                      />
+                      {vehicle?.vehicle_image1 && (
+                        <img
+                          src={`${baseUrl}${vehicle?.vehicle_image1}`}
+                          alt={`Vehicle ${vehicle.id}`}
+                          style={{ width: "50px", height: "50px" }}
+                        />
+                      )}
                     </TableCell>
+   
                   </TableRow>
                 </TableBody>
               </Table>

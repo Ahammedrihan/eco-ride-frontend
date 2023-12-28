@@ -20,7 +20,7 @@ import axios from "../../Utils/axios";
 
 import { selectUser,userLogout } from "../../../Redux/slices/userSlice/authSlice";
 
-const pages = ["Register", "Pricing", "Blog"];
+const pages = ["Join with us", "Pricing", "Blog"];
 
 function Navbar() {
 
