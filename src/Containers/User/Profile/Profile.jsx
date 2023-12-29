@@ -27,13 +27,14 @@ function Profile() {
   };
   const userStoreData = useSelector((store)=> store.authuser.userData)
   const userId = userStoreData.user.user_id;
-  console.log(userId)
   const userAccessToken = userStoreData.data.access;
+  const [userBasicProileUpdated, setUserBasicProileUpdated] = useState(false);
 
+  
   const path = `${userProfileurl}${userId}`
   const role = userStoreData.user.role
-
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [profileData,setprofileData]= useState({
@@ -45,7 +46,6 @@ function Profile() {
   })
 
   console.log(profileData)
-
   const handleChange =(e)=>{
 
     const {name,value}=e.target;
@@ -66,11 +66,15 @@ function Profile() {
         }
       })
       console.log(response)
-      if (response.status ==201){
+      if (response.status === 201){
+       
+        console.log(open,"MODAL")
         Swal.fire({
           title:"Profile created Sucessfully",
-
         })
+        setUserBasicProileUpdated((prev) => !prev);
+         setOpen(false)
+         
       }else{
         console.error(response.data.error);
       }
@@ -83,7 +87,6 @@ function Profile() {
 
 
   useEffect(()=>{
-
     const getBasicProfile = async(userId)=>{
       try{
       const response = await axios.get(basicProfileUrl+`/${userId}/`,{
@@ -125,18 +128,14 @@ function Profile() {
     getBasicProfile(userId)
   },[])
  
-  
 
   return (
     <div>
-
-   
     <div >
-      <ProfilePage endPoint ={path} accessToken={userAccessToken} userId={userId} role={role}/>
+      <ProfilePage endPoint ={path} accessToken={userAccessToken} userId={userId} role={role}
+      userBasicProileUpdated={userBasicProileUpdated}/>
       {open ?
       <div>
-
-
       <Modal
         open={open}
         aria-labelledby="modal-modal-title"
@@ -187,20 +186,15 @@ function Profile() {
                       handleChange(e)
                     }}
                      value={profileData.alternate_phone}/>
-                    
                   </Form.Group>
                 </Col>
               </Row>
-        
           <Button onClick={handleClose}>Close</Button>
           <Button onClick={()=>handleSubmitFormData(userId)}>submit</Button>
         </Box>
       </Modal>
     </div>:null}
-
-    
     </div>
-    
     </div>
   )
 }

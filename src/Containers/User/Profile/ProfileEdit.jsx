@@ -54,15 +54,21 @@ export default function ProfileEdit(props) {
 
   const handleSubmit = async () => {
     try {
-      await axios.put(`api/user/update-profile/`, formData, {
+     const response = await axios.put(`api/user/update-profile/`, formData, {
         headers: {
           Authorization: `Bearer ${props.token}`,
         },
       });
-      Swal.fire({
-        title :"Success!"
-
-      })
+      if (response.status === 200){
+        handleClose()
+        Swal.fire({
+          title :"Success!",
+          text: 'Profile Updated succesfullt',
+          icon: 'success'
+        })
+       
+        props.fetchUserData()
+      }
     } catch (error) {
       console.error("Error updating profile details", error);
     }

@@ -117,10 +117,6 @@ function Navbar() {
           console.log("balck list not done")
         }
       })
-
-      
-      
-      
     }
   }
 

@@ -5,7 +5,7 @@ import axios from "../../Utils/axios";
 import AdminSideBar from "../../Components/Admin/AdminSideBar";
 import Button from '@mui/material/Button';
 
-function UserListPage( props) {
+function  UserListPage( props) {
   const {path} = props
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredRow, setFilteredRow] = useState([]);

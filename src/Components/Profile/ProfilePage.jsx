@@ -2,6 +2,10 @@ import React, { useState ,useEffect} from 'react';
 import DriverSideBar from "../Driver/driverSidebar";
 import axios from "../../Utils/axios"
 import UserProfileSideBar from '../User/UserProfileSidebar';
+import { driverLogout } from '../../../Redux/slices/driverSlice/driverauthSlice';
+import { userLogout } from '../../../Redux/slices/userSlice/authSlice';
+
+import { useDispatch } from "react-redux";
 import {
   MDBCol,
   MDBContainer,
@@ -21,6 +25,8 @@ import ProfileEdit from '../../Containers/User/Profile/ProfileEdit';
 export default function ProfilePage(props) {
   const [userData,setUserData] = useState(null)
   const [isOpenModal,setIsOpenModal] = useState(false)
+  const dispatch = useDispatch()
+
   console.log(isOpenModal,"IS MODLA OPEN")
   console.log(userData,"userData")
 
@@ -35,6 +41,17 @@ export default function ProfilePage(props) {
 
   
   useEffect (()=>{
+   
+    fetchUserData()
+   
+  },[])
+  useEffect (()=>{
+   
+    fetchUserData()
+   
+  },[props.userBasicProileUpdated])
+
+  const fetchUserData = ()=>{
     const response = axios.get(props.endPoint,{
       headers:{
         Authorization : `Bearer ${props.accessToken}`
@@ -43,17 +60,44 @@ export default function ProfilePage(props) {
       console.log(response,"lanl;andlfknadlknflkndflkndflknad")
       if(response.status ===200){
         setUserData(response.data)
-        
+        console.log("user data")
 
       }
     })
-  },[])
+  }
+
+//   const handleLogout = async()=>{
+//     if(props.role === 'user'){
+//       dispatch(driverLogout())
+//     }else{
+//       dispatch(driverLogout())
+//     }
+    
+//     await axios.post(`api/user/logout/`,{refresh_token},{
+//       headers:{
+//         "Content-Type": "application/json",
+//         Authorization:`Bearer ${accesstoken}`
+//       }
+//     }).then((response)=>{
+//       if(response.status === 205){
+//         console.log("logout sucess and blacklisted")
+//         localStorage.removeItem("userData")
+//         localStorage.clear()
+
+//       }else{
+//         console.log("balck list not done")
+//       }
+//     })
+  
+// }
+
+
 
 
   return (
     <section style={{ backgroundColor: '#eee', }}>
       {isOpenModal ? 
-      <ProfileEdit onClose={handleModalClose} token = {props.accessToken} userId = {props.userId} data = {userData}/>:null
+      <ProfileEdit onClose={handleModalClose} token = {props.accessToken} userId = {props.userId} data = {userData} fetchUserData={fetchUserData} />:null
       }
 
      <MDBContainer className="pt-5">
@@ -80,7 +124,7 @@ export default function ProfilePage(props) {
                 </div>
 
                 <Button style={{width:"100px",marginRight:"10px",backgroundColor:"green",border:"none"}} onClick={()=>handleModalOpen()}>Update</Button>
-               <Button style={{width:"100px",backgroundColor:"red",border:"none"}}>Logout</Button>
+               {/* <Button style={{width:"100px",backgroundColor:"red",border:"none"}} onClick={()=>handleLogout()}>Logout</Button> */}
               </MDBCardBody>
 
             </MDBCard>
@@ -126,14 +170,14 @@ export default function ProfilePage(props) {
                 </MDBRow>
                 
                 <hr />
-                {/* {profile?
+                {userData?.profile_info && userData.profile_info.length > 0 ?
                 <>
                  <MDBRow>
                   <MDBCol sm="3">
                     <MDBCardText>Gender</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{ profile?.gender === "M" ?"Male":"Female" }</MDBCardText>
+                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{ userData?.profile_info[0]?.gender === "M" ?"Male":"Female" }</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -142,10 +186,10 @@ export default function ProfilePage(props) {
                     <MDBCardText>Age</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{profile?.age}</MDBCardText>
+                    <MDBCardText className="text-muted" style={{fontWeight:"bold"}}>{userData?.profile_info[0]?.age}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
-                </>:null} */}
+                </>:null}
               </MDBCardBody>
             </MDBCard>
             </MDBCol>
