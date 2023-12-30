@@ -47,6 +47,15 @@ function DriverActive() {
     longitude: "",
   });
 
+  const tripStatus = tripDetails?.data?.trip?.trip_status
+
+  let status
+  if (tripStatus === 'pending' ){
+    status = 'start'
+  }if (tripStatus === 'started'){
+    status = 'finish'
+  }
+
   console.log(userLocationData,"?????????????")
 
 
@@ -596,7 +605,7 @@ function DriverActive() {
                            }}
                         style={{ backgroundColor: "#000" }}
                       >
-                        {tripDetails?.data?.trip?.trip_status}
+                        {status}
                       </Button>
                     </Box>
             </>:<Typography  sx={{ color: "green" }}>

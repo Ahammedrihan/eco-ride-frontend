@@ -125,7 +125,7 @@ const darkTheme = createTheme({
                 </ListItemButton>
               </NavLink>
             </List>
-            <List>
+            {/* <List>
               <NavLink
                 to="/user-trips"
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -138,7 +138,7 @@ const darkTheme = createTheme({
                   <ListItemText primary="All Trips" />
                 </ListItemButton>
               </NavLink>
-            </List>
+            </List> */}
             <List>
               <NavLink
                 to="/admin/vehicle-list"

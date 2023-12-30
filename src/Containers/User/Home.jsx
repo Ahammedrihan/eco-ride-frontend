@@ -4,7 +4,8 @@ import UserHomeCarousal from '../../Components/User/HomeCarousal/UserHomeCarousa
 import WhyChoose from '../../Components/User/HomeCarousal/WhyChoose'
 import Faq from '../../Components/User/Faq'
 
-// import img from "../../assets/Pool.Webp";
+import img from "../../assets/user.jpg";
+import UserHomeBanner from '../../Components/User/HomeCarousal/UserHomeBanner'
 
 
 function Home() {
@@ -12,23 +13,13 @@ function Home() {
     <div>
       <Navbar/>
       <UserHomeCarousal/>
-      <div style={{display:"flex"}}>
-      {/* <div
-        style={{
-          backgroundImage: `url(${img})`,
-          height: "540px",
-          width:"1100px",
-          marginLeft:"-130px"
-        }}
-      ></div> */}
-      <div>
-      <h1>For Safe Rid</h1>
+      <UserHomeBanner/>
+      <div style={{margin:"-10px",border:"none"}}> 
+      <h5 style={{textAlign:"center",backgroundColor:"black",color:"white",paddingBottom:"90px"}}>
+        Safety first, always. Your well-being is our top priority on every journey
+</h5>
       </div>
-      
-
-
-
-      </div>
+ 
       
      
       <WhyChoose/>

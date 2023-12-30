@@ -32,6 +32,10 @@ import { NavLink } from "react-router-dom";
 import {useSelector} from 'react-redux'
 import { compose } from 'redux';
 import BarChart from './BarChart';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useDispatch } from 'react-redux';
+import { logoutAdmin } from '../../../../Redux/slices/adminSlice/adminauthSlice';
+
 
 // function Copyright(props) {
 //   return (
@@ -100,11 +104,34 @@ export default function Dashboard() {
 
   const adminStoreData = useSelector((store)=>store.adminauth.adminAuthTokenData)
   const accessToken = adminStoreData.data.access
+  const refresh_token = adminStoreData.data.refresh
 
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {setOpen(!open)};
   const [basicCounts, setBasicCounts] = useState(null)
+  const dispatch = useDispatch()
 
+  const handleLogout = async()=>{
+
+      dispatch(logoutAdmin())
+      await axios.post(`api/user/logout/`,{refresh_token},{
+        headers:{
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${accessToken}`
+        }
+      }).then((response)=>{
+        if(response.status === 205){
+          console.log("logout sucess and blacklisted")
+          // localStorage.removeItem("userData")
+          // localStorage.clear()
+
+        }else{
+          console.log("balck list not done")
+        }
+      })   
+      
+  }
+  
 
 
   useEffect (()=>{
@@ -166,9 +193,7 @@ export default function Dashboard() {
               Dashboard
             </Typography>
             <IconButton color="inherit">
-              {/* <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge> */}
+               <LogoutIcon onClick={()=>handleLogout()}/>
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -215,7 +240,7 @@ export default function Dashboard() {
                 </ListItemButton>
               </NavLink>
             </List>
-            <List>
+            {/* <List>
               <NavLink
                 to="/admin/trip-list"
                 style={{ textDecoration: "none", color: "inherit" }}
@@ -228,7 +253,7 @@ export default function Dashboard() {
                   <ListItemText primary="All Trips" />
                 </ListItemButton>
               </NavLink>
-            </List>
+            </List> */}
             <List>
               <NavLink
                 to="/admin/vehicle-list"
@@ -243,20 +268,7 @@ export default function Dashboard() {
                 </ListItemButton>
               </NavLink>
             </List>
-            <List>
-              <NavLink
-                to="/"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                {" "}
-                <ListItemButton disablePadding>
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Reset Password" />
-                </ListItemButton>
-              </NavLink>
-            </List>
+           
       
         </Drawer>
 {/*================================== SIDE BAR END=========================================  */}

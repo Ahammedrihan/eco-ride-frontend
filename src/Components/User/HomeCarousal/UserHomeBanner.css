@@ -1,0 +1,47 @@
+
+
+   .main {
+    display: flex;
+    flex-direction: row;
+    background-color:black;
+    height: 600px;
+    padding-top: 90px;
+  }
+  
+  .banner-left {
+    flex: 1;
+    height: 380px;
+    background-size: cover;
+    border-radius: 20px;
+  }
+  
+  .banner-right {
+    flex: 1;
+    height: 380px;
+    font-size: 18px; /* Specify the font size */
+    font-weight: 800;
+    font-size:large ;
+    font-weight: 800;
+    color: white;
+    padding: 40px;
+  }
+  
+  @media (max-width: 900px) {
+    .main {
+      flex-direction: column;
+      height: 620px;
+      padding-top: 10px;
+
+    }
+  
+    .banner-left {
+      flex: 100%;
+      border-radius: 0px;
+
+    }
+  
+    .banner-right {
+      flex: 100%;
+    }
+  }
+  

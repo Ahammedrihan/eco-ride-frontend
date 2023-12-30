@@ -18,7 +18,7 @@ import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { loadRazorPayScript,createRazorPayOrder } from '../../../Utils/Razorpay';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 const style = {
@@ -65,7 +65,7 @@ export function SwipePOP(props) {
   const [travelAmount,settravelAmount] = useState(null)
   const [selectedPaymentMethod,setSelectedPaymentMethod] = useState('')
   const [razorpayPaymentDetails,setRazorpayPaymentDetails] = useState()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const handlePaymentMethodChange = (value)=>{
     setSelectedPaymentMethod(value);
@@ -177,7 +177,7 @@ export function SwipePOP(props) {
           icon: 'success'
         })
         onClose()
-        navigate('/')
+        // navigate('/')
       }
     }).catch((error)=>{
       if (error.response && error.response.data){

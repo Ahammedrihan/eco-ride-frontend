@@ -36,7 +36,7 @@ import { grey } from '@mui/material/colors';
 
 
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // import { SwipePOP } from "./Swipe";
 import { SwipePOP } from "./Swipe";
@@ -57,7 +57,7 @@ const style = {
 };
 
 function RequestRide() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const userStoreData = useSelector((store) => store.authuser.userData);
   const userId = userStoreData.user.user_id;
@@ -144,7 +144,7 @@ function RequestRide() {
             confirmButtonText: 'try later'
           }).then((result)=>{
             if (result.isConfirmed){
-              navigate('/')
+              // navigate('/')
             }
           });
           

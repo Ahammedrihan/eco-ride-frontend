@@ -41,10 +41,10 @@ export default function AdminLogin() {
   },[navigate,admin]) 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const data = JSON.stringify({ email,password })
-    axios.post(userLoginUrl,data ,{
+    await axios.post(userLoginUrl,data ,{
       headers:{"Content-Type":"application/json"},
     })
     .then((response)=>{
@@ -61,7 +61,7 @@ export default function AdminLogin() {
              navigate('/admin/home') 
             Swal.fire({
               title: 'Success!',
-              text: 'logged in admin',
+              text: 'Welcome  admin',
               icon: 'success'
             })
           }  
@@ -89,12 +89,7 @@ export default function AdminLogin() {
     }).catch((error) => {
       console.log('Error occurred during login:', error);
     });
-    Swal.fire({
-          title: 'Invalid Credentials!',
-          text: 'Try Again',
-          icon: 'error'
-          
-        })
+    
     
   };
 
@@ -145,10 +140,7 @@ export default function AdminLogin() {
                 setPassword(e.target.value)
               }}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+         
             <Button
               type="submit"
               fullWidth
@@ -159,37 +151,25 @@ export default function AdminLogin() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                {/* <Link href="#" variant="body2">
                   Forgot password?
-                </Link>
+                </Link> */}
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                {/* <Link href="#" variant="body2">
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </Link> */}
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
 }
 
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 const defaultTheme = createTheme();
 
 
