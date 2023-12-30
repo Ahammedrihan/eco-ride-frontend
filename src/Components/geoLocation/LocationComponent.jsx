@@ -15,6 +15,7 @@ const LocationComponent = (props)=>{
                     },
                     (error) => {
                         console.error('Error getting location:', error.message);
+                        props.locationError(error.message)
                       }
                     
                 )

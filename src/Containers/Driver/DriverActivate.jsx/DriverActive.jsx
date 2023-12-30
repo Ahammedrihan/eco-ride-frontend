@@ -37,6 +37,7 @@ function DriverActive() {
   console.log(tripDetails,"@@@@@@@@@@@@@@@@@@@@")
   const [storeLocationInfo, setStoreLocationInfo] = useState(null);
   const [rideStatus,setRideStatus] = useState(null)
+  const [isBrowserLocationTurnOn,setisBrowserLocationTurnOn] = useState(false)
   const [locationDetails, setLocationDetails] = useState({
     geometry: {
       coordinates: [],
@@ -110,8 +111,14 @@ function DriverActive() {
     setSelectedAddressType("current");
   };
 
+  const locationError = (error)=>{
+ 
+    setisBrowserLocationTurnOn(false)
+  }
+
   const getLatLang = (latitude, longitude) => {
     console.log(latitude, longitude, "lskdldkmc");
+    setisBrowserLocationTurnOn(true)
     setUserLocationData({
       latitude: latitude,
       longitude: longitude,
@@ -160,15 +167,35 @@ function DriverActive() {
       });
   };
 
+  const clearUserLocationData = () => {
+    setUserLocationData({
+      latitude: "",
+      longitude: "",
+    });
+  };
+
+
 
 
   const addressConfirmation = async () => {
+   
     if (userLocationData.latitude === "" && userLocationData.longitude === "") {
-      Swal.fire({
-        title: "Select Address First",
-        text: "Choose your address before proceeding for live",
-        icon: "error",
-      });
+      if (isBrowserLocationTurnOn === false){
+        Swal.fire({
+           title:"Location permission denied",
+           text:"Please Turn on browser geolocation",
+           icon: "error",
+         })
+         }else{
+          Swal.fire({
+            title: "Select Address First",
+            text: "Choose your address before proceeding for live",
+            icon: "error",
+          });
+
+         }
+
+      
     } else {
       const response = await axios
         .post(`api/driver/driver/set-active-drivers/`, userLocationData, {
@@ -261,6 +288,7 @@ function DriverActive() {
         if (response.status === 200) {
           console.log(response);
           setLive(false);
+          clearUserLocationData()
           console.log("success");
           Swal.fire({
             title: "Success!",
@@ -383,7 +411,7 @@ function DriverActive() {
                     </Typography>
 
                     <br></br>
-                    <LocationComponent getLatLang={getLatLang} />
+                    <LocationComponent getLatLang={getLatLang}  locationError={locationError} />
                   </>
                 )}
 
