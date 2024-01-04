@@ -20,7 +20,7 @@ import axios from "../../Utils/axios";
 
 import { selectUser,userLogout } from "../../../Redux/slices/userSlice/authSlice";
 
-const pages = ["Join with us", "Pricing", "Blog"];
+const pages = ["Drive with us"];
 
 function Navbar() {
 
@@ -49,6 +49,7 @@ function Navbar() {
     settings = [
       { id: 1, text: "Register", path: "/register" },
       { id: 2, text: "Login", path: "/login" },
+      { id: 2, text: "Driver Login", path: "/driver/login" },
     ];
   }
 

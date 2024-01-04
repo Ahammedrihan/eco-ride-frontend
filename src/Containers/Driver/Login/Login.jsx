@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {useDispatch ,useSelector} from 'react-redux'
 import axios from '../../../Utils/axios'
 import jwt_decode from 'jwt-decode'
@@ -22,25 +22,13 @@ import { driverLogin } from '../../../../Redux/slices/driverSlice/driverauthSlic
 import {useEffect} from  'react'
 
 
-
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 const defaultTheme = createTheme();
 
 
 
 export default function DriverLogin() {
+
+
 
   const dispatch  = useDispatch()
   const navigate = useNavigate()
@@ -124,6 +112,10 @@ export default function DriverLogin() {
     
   };
 
+  const handleRedirect =()=>{
+    navigate('/')
+  }
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -171,37 +163,24 @@ export default function DriverLogin() {
                 setPassword(e.target.value)
               }}
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+         
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {/* style={{backgroundColor:"#000"}} */}
               Sign In
             </Button>
             <Grid container>
-              {/* <Grid item xs>
-                <Link href="#" variant="body2" >
-                style={{textDecoration: 'none',color:"black"}}
-                  Forgot password?
+              <Grid item xs>
+                <Link to="/" variant="body2"  style={{textDecoration: 'none',cursor: 'pointer'}} onClick={()=>handleRedirect()}>
+               Back to user home page
                 </Link>
-              </Grid> */}
-
-              {/* <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid> */}
+              </Grid>
             </Grid>
-        
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
