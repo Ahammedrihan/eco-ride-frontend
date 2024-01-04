@@ -7,6 +7,7 @@ function UserHomeBanner() {
       <div className='main'>
       <div className ='banner-left'
         style={{
+          
           backgroundImage: `url(${img})`,
           
         }}

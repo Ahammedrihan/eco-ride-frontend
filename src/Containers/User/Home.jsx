@@ -14,21 +14,13 @@ function Home() {
       <Navbar/>
       <UserHomeCarousal/>
       <UserHomeBanner/>
-      <div style={{margin:"-10px",border:"none"}}> 
-      <h5 style={{textAlign:"center",backgroundColor:"black",color:"white",paddingBottom:"90px"}}>
+      <div style={{margin:"0px",border:"none",marginBottom:"-10px"}}> 
+      <h5 style={{textAlign:"center",backgroundColor:"black",color:"white",paddingBottom:"90px",padding:"20px"}}>
         Safety first, always. Your well-being is our top priority on every journey
-</h5>
+       </h5>
       </div>
- 
-      
-     
       <WhyChoose/>
-
       <Faq />
-   
-    
-
-
     </div>
   )
 }

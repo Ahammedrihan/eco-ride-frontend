@@ -1,29 +1,29 @@
-.container {
-    display: flex;
-    
-    
-  }
-  
-  .left-parent {
-    flex:  70%; 
-  
-  }
-  
-  .right-parent  {
-    flex: 30%; 
-  }
-  
-  @media (max-width:600px) {
-    .container {
-      flex-direction:column;
-    }
-  
-    .left,
-    .right {
-      flex: 1 0 100%; 
-    }
+.containerFluid {
+  display: flex;
+}
+
+.left-parent {
+  flex: 70%;
+}
+
+.right-parent {
+  flex: 30%;
+}
+
+@media (max-width: 600px) {
+  .containerFluid {
+    flex-direction: column;
   }
 
+  .left-parent{
+    flex: 1 0 100%; 
+  }
+  .right-parent {
+    flex: 1 0 100%; 
+    padding-left: 80px;
+  }
+}
+
 
 
 
@@ -34,9 +34,9 @@
     
 
 
-@media(max-width:600px){
+/* @media(max-width:600px){
     .container{
         flex-direction: column;
     }
-}
+} */
 

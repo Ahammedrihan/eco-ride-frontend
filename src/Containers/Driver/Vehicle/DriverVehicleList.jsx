@@ -131,6 +131,7 @@ export default DriverVehicleList;
 
 function Row(props) {
   const baseUrl = "http://localhost:8000";  
+ 
 
   const { vehicle, accessToken ,userVehicle,driverId} = props;
   const [open, setOpen] = React.useState(false);
@@ -242,7 +243,7 @@ function Row(props) {
                       {vehicle?.vehicle_image1 && (
                         <img
                           src={`${baseUrl}${vehicle?.vehicle_image1}`}
-                          alt={`Vehicle ${vehicle.id}`}
+                          alt={`${baseUrl}${vehicle?.vehicle_image1}`}
                           style={{ width: "50px", height: "50px" }}
                         />
                       )}

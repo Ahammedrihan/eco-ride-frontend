@@ -13,32 +13,14 @@ import TextField from "@mui/material/TextField";
 import mapboxgl from "mapbox-gl";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-import NestedModal from "../../../Components/User/ScheduleRide";
 import Switch from '@mui/material/Switch';
 import Chip from '@mui/material/Chip';
 import Swal from "sweetalert2";
-import ReactDOMServer from 'react-dom/server';
-
-
-
 import ReactDOM from 'react-dom';
-
-
-
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
-
-import Edit from '@mui/icons-material/Edit';
-import LocationOn from '@mui/icons-material/LocationOn';
-import { grey } from '@mui/material/colors';
-
-
-
-// import { useNavigate } from "react-router-dom";
-
-// import { SwipePOP } from "./Swipe";
+import { useNavigate } from "react-router-dom";
 import { SwipePOP } from "./Swipe";
 
 
@@ -57,8 +39,7 @@ const style = {
 };
 
 function RequestRide() {
-  // const navigate = useNavigate()
-
+  const navigate = useNavigate()
   const userStoreData = useSelector((store) => store.authuser.userData);
   const userId = userStoreData.user.user_id;
   const userAccessToken = userStoreData.data.access;
@@ -132,8 +113,6 @@ function RequestRide() {
           }))
           );
           setIsActiveDrivers(true)
-
-
         } if (response.status === 204) {
           console.log("failed");
           Swal.fire({
@@ -141,19 +120,30 @@ function RequestRide() {
             text: "Due to heavy booking no drivers are active",
             icon: "error",
             confirmButtonColor: '#3085d6',
-            confirmButtonText: 'try later'
+            confirmButtonText: 'Try later'
           }).then((result)=>{
             if (result.isConfirmed){
-              // navigate('/')
+              navigate('/')
+              console.log("HEY HOW ARE YOU")
             }
           });
-          
         }
       })
       .catch((error) => {
         console.log(error)
-       
-       
+        if (error.response.status === 404) {
+          console.log("failed");
+          Swal.fire({
+            title: "No Locations Found",
+            text: "Enter locations to find nearby drivers",
+            icon: "error",
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Enter'
+          }).then((result)=>{
+            if (result.isConfirmed){
+            }
+          });
+        }
       });
   };
 
@@ -295,11 +285,15 @@ function RequestRide() {
               </Typography>
 
               <Typography color="text.secondary">
-                Set default address as starting point
-              
+            
                     {wheatherUserHaveDefaultAddress ? 
+             
                     (
                       <>
+                               <Typography color="text.secondary">
+                                        Set default address as starting point
+
+                        </Typography>
                       {userSelectDefaultAddress ?(
                          <Switch
                          checked={userSelectDefaultAddress}
@@ -370,6 +364,7 @@ function RequestRide() {
                       sx={{ mt: 1, mb: 2 }}
                       style={{ backgroundColor: "#000" }}
                       onClick={handleShowNearByDrivers}
+                      // disabled={!OrginLocationPropPassedDataforForm}
                     >
                       Choose driver
                     </Button>

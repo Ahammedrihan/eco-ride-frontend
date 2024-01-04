@@ -21,6 +21,7 @@ import Swal from 'sweetalert2';
 // import { useNavigate } from 'react-router-dom';
 
 
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -310,9 +311,7 @@ export function SwipePOP(props) {
           <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
           Vehicle Model &nbsp;&nbsp;:&nbsp;    {driver.driverVehicleDetails.vehicle_year}
           </Typography>
-          <Typography variant="body2" color="black" sx={{ mt: .5,fontSize:"16px" }}>
-          Vehicle id &nbsp;&nbsp;:&nbsp;    {driver.driverVehicleDetails.id}
-          </Typography>
+         
           <Typography id="modal-modal-description" sx={{ mt: 4 }} style={{fontSize: '25px', textAlign: 'center', fontWeight:"bold" }}>
            Driver Details
           </Typography>

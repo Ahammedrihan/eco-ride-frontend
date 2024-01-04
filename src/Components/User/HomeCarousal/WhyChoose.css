@@ -5,6 +5,8 @@
     flex-direction: row;
     background-color: black;
     height: 500px;
+    padding-top: 30px;
+    align-items: center;
   }
   
   .left-side {
@@ -33,14 +35,14 @@
     .black-portion {
       flex-direction: column;
       margin-top: 0;
-      height: 800px;
+      height: 600px;
     }
   
     .left-side{
         flex: 100%;
-        height: 400px;
+        height: 300px;
         margin-left: 40px;
-        width: 600px;
+        width: 400px;
 
     }
     .right-side {
