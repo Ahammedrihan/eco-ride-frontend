@@ -4,19 +4,25 @@
 
 .left-parent {
   flex: 70%;
+  width: 400px ;
+  padding-top:30px ;
+  margin-right: 60px;
+  margin-left: 40px ;
 }
 
 .right-parent {
   flex: 30%;
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 900px) {
   .containerFluid {
     flex-direction: column;
   }
 
   .left-parent{
     flex: 1 0 100%; 
+     width: 330px ;
   }
   .right-parent {
     flex: 1 0 100%; 

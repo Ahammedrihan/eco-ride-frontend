@@ -10,6 +10,7 @@ function WhyChoose() {
     <div className='outside'>
         <div className='black-portion'>
            <div className='left-side'
+           
         style={{
           backgroundImage: `url(${img})`,
         }}

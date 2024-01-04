@@ -240,13 +240,6 @@ function RequestRide() {
       <div className="containerFluid" style={{ display: "flex" }}>
         <div
           className="left-parent"
-          style={{
-            width: "400px",
-            paddingTop: "30px",
-            marginRight: "60px",
-            marginLeft: "40px",
-            
-          }}
         >
           <MapComponent
             locationDataForForm={locationDataForForm}
@@ -265,8 +258,8 @@ function RequestRide() {
             style={{
               borderColor: "grey",
               borderWidth: "2px",
+              width:"330px",
               borderStyle: "solid",
-              width: "330px",
               borderRadius: "20px",
             }}
           >
